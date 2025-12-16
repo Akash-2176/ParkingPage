@@ -13,8 +13,29 @@
     <meta property="og:title" content="EzuraArc | Where Dreams Are Crafted to Reality">
     <meta property="og:site_name" content="EzuraArc">
     <meta property="og:image" content="assets/FinalLogo.svg">
+        <meta name="description" content="EzuraArc — Where Dreams Are Crafted to Reality. Our team is building the site with creativity and care. Launching soon." />
+        <meta name="keywords" content="EzuraArc, coming soon, startup, creative studio, web design, product launch" />
+        <meta name="author" content="EzuraArc" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:description" content="Where Dreams Are Crafted to Reality — our site is launching soon. Follow our progress." />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="EzuraArc" />
+        <meta name="twitter:description" content="Where Dreams Are Crafted to Reality — our site is launching soon. Follow our progress." />
+        <meta name="twitter:image" content="assets/FinalLogo.svg" />
 
-    <!-- Google Font: DM Sans -->
+        <!-- Structured data (Organization) -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "EzuraArc",
+            "logo": "assets/FinalLogo.svg"
+        }
+        </script>
+
+        <!-- Google Font: DM Sans -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
@@ -56,6 +77,10 @@
             width: 120px;
             height: auto;
             margin-bottom: 1.5rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 36%;
         }
 
         h1 {
@@ -106,6 +131,25 @@
             .tagline {
                 font-size: 1rem;
             }
+        }
+        /* Responsive tweaks for tablet and small desktop */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 640px;
+                padding: 2.25rem 1.25rem;
+                width: 92%;
+            }
+            .logo { width: 100px; max-width: 28%; }
+            h1 { font-size: 2.1rem; }
+            .info { font-size: 0.98rem; }
+        }
+
+        /* Small phones */
+        @media (max-width: 360px) {
+            .container { padding: 1.25rem; border-radius: 14px; }
+            .logo { width: 84px; max-width: 34%; }
+            h1 { font-size: 1.5rem; }
+            .badge { padding: 0.45rem 0.95rem; font-size: 0.78rem; }
         }
     </style>
 </head>
