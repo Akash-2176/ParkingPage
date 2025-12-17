@@ -124,6 +124,21 @@
             font-weight: 600;
         }
 
+        .contact {
+            margin-top: 1.75rem;
+            font-size: 0.95rem;
+            color: var(--muted);
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            align-items: center;
+        }
+
+        .contact a {
+            color: #fff;
+            text-decoration: underline dotted;
+        }
+
         @media (max-width: 480px) {
             h1 {
                 font-size: 1.9rem;
@@ -170,6 +185,12 @@
         </p>
 
         <div class="badge">Launching Soon</div>
+
+        <div class="contact" aria-label="Contact information">
+            <p class="contact-line"><strong>Email:</strong> <a href="mailto:hello@ezuraarc.com">hello@ezuraarc.com</a></p>
+            <p class="contact-line"><strong>Phone:</strong> <a href="tel:+917305594291">+91 7305594291</a></p>
+            <p class="contact-line"><strong>Location:</strong> Karur</p>
+        </div>
 
         <footer>
             © 2025 <span>EzuraArc</span>. All rights reserved.
