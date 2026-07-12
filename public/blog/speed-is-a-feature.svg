@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#171A24"/>
+      <stop offset="100%" stop-color="#0E0F14"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF7A4E"/>
+      <stop offset="100%" stop-color="#ED3F0F"/>
+    </linearGradient>
+    <linearGradient id="streak" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF5A2E" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#FF5A2E"/>
+    </linearGradient>
+    <linearGradient id="streakSoft" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.25"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF5A2E" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#FF5A2E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+
+  <!-- distance ticks -->
+  <g stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="2">
+    <line x1="120" y1="880" x2="120" y2="850"/>
+    <line x1="320" y1="880" x2="320" y2="858"/>
+    <line x1="520" y1="880" x2="520" y2="850"/>
+    <line x1="720" y1="880" x2="720" y2="858"/>
+    <line x1="920" y1="880" x2="920" y2="850"/>
+    <line x1="1120" y1="880" x2="1120" y2="858"/>
+    <line x1="1320" y1="880" x2="1320" y2="850"/>
+  </g>
+  <line x1="100" y1="880" x2="1500" y2="880" stroke="#FFFFFF" stroke-opacity="0.1" stroke-width="2"/>
+
+  <!-- background velocity streaks -->
+  <rect x="120" y="200" width="520" height="14" rx="7" fill="url(#streakSoft)"/>
+  <rect x="300" y="260" width="740" height="10" rx="5" fill="url(#streak)" opacity="0.35"/>
+  <rect x="80"  y="620" width="460" height="10" rx="5" fill="url(#streakSoft)" opacity="0.8"/>
+  <rect x="240" y="700" width="660" height="14" rx="7" fill="url(#streak)" opacity="0.3"/>
+  <rect x="520" y="140" width="640" height="8" rx="4" fill="url(#streak)" opacity="0.25"/>
+
+  <!-- comet tail -->
+  <path d="M240 470 C620 440 900 420 1120 428 L1120 492 C900 496 620 486 240 470 Z" fill="url(#streak)" opacity="0.9"/>
+  <rect x="420" y="392" width="560" height="8" rx="4" fill="url(#streak)" opacity="0.5"/>
+  <rect x="500" y="540" width="480" height="8" rx="4" fill="url(#streak)" opacity="0.5"/>
+
+  <!-- comet head -->
+  <circle cx="1180" cy="460" r="240" fill="url(#glow)"/>
+  <circle cx="1180" cy="460" r="64" fill="url(#brand)"/>
+  <circle cx="1204" cy="440" r="18" fill="#FFFFFF" fill-opacity="0.35"/>
+
+  <!-- speedometer arc -->
+  <path d="M1372 212 A 170 170 0 0 1 1520 360" fill="none" stroke="#FF5A2E" stroke-opacity="0.5" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 14"/>
+  <circle cx="1372" cy="212" r="6" fill="#FF5A2E"/>
+</svg>

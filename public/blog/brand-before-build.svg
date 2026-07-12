@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF4EE"/>
+      <stop offset="100%" stop-color="#FFE3D6"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF7A4E"/>
+      <stop offset="100%" stop-color="#ED3F0F"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF5A2E" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#FF5A2E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="800" cy="400" r="430" fill="url(#halo)"/>
+
+  <!-- identity: concentric arcs -->
+  <circle cx="800" cy="380" r="230" fill="none" stroke="#FF5A2E" stroke-opacity="0.2" stroke-width="3"/>
+  <circle cx="800" cy="380" r="168" fill="none" stroke="#FF5A2E" stroke-opacity="0.45" stroke-width="3"/>
+  <circle cx="800" cy="380" r="106" fill="none" stroke="#FF5A2E" stroke-opacity="0.8" stroke-width="4"/>
+  <path d="M800 150 A 230 230 0 0 1 1030 380" fill="none" stroke="url(#brand)" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- core mark -->
+  <circle cx="800" cy="380" r="44" fill="url(#brand)"/>
+  <circle cx="818" cy="366" r="12" fill="#FFFFFF" fill-opacity="0.4"/>
+
+  <!-- satellite -->
+  <circle cx="1006" cy="222" r="22" fill="url(#brand)"/>
+  <circle cx="1006" cy="222" r="36" fill="none" stroke="#FF5A2E" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="4 10"/>
+
+  <!-- guides -->
+  <line x1="800" y1="110" x2="800" y2="650" stroke="#434A5C" stroke-opacity="0.14" stroke-width="2" stroke-dasharray="2 10"/>
+  <line x1="530" y1="380" x2="1070" y2="380" stroke="#434A5C" stroke-opacity="0.14" stroke-width="2" stroke-dasharray="2 10"/>
+
+  <!-- the build: foundation slabs beneath the identity -->
+  <rect x="590" y="668" width="420" height="52" rx="26" fill="#434A5C"/>
+  <rect x="520" y="742" width="560" height="52" rx="26" fill="#565D70"/>
+  <rect x="450" y="816" width="700" height="52" rx="26" fill="#2E3340"/>
+
+  <!-- corner compass -->
+  <circle cx="210" cy="190" r="80" fill="none" stroke="#434A5C" stroke-opacity="0.25" stroke-width="2" stroke-dasharray="6 12"/>
+  <circle cx="210" cy="190" r="6" fill="#434A5C" fill-opacity="0.5"/>
+</svg>

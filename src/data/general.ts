@@ -1,0 +1,120 @@
+export const stats = [
+  { value: 3, suffix: "", label: "Flagship projects delivered" },
+  { value: 100, suffix: "%", label: "Client satisfaction" },
+  { value: 24, prefix: "<", suffix: "h", label: "Reply to enquiries" },
+  { value: 10, suffix: "", label: "Disciplines, in-house" },
+];
+
+export const process = [
+  {
+    step: "01",
+    title: "Discover",
+    body: "We dig into your business, users and ambition. Positioning, goals and the metrics that define success — before a single pixel.",
+    outputs: ["Strategy workshop", "Research & audit", "Success metrics"],
+  },
+  {
+    step: "02",
+    title: "Design",
+    body: "Art direction, prototypes and a motion language. We design the whole experience and validate it with real people, fast.",
+    outputs: ["Art direction", "Interactive prototype", "Design system"],
+  },
+  {
+    step: "03",
+    title: "Build",
+    body: "Design and engineering in the same room. Type-safe, tested, accessible code shipped in reviewable increments.",
+    outputs: ["Production build", "QA & testing", "Performance budget"],
+  },
+  {
+    step: "04",
+    title: "Launch",
+    body: "SEO, analytics and a flawless deploy. We measure, learn and iterate — then keep your product healthy and evolving.",
+    outputs: ["Launch & handover", "Analytics setup", "Care plan"],
+  },
+];
+
+export const techStack = [
+  { name: "Next.js", category: "Framework" },
+  { name: "React", category: "Framework" },
+  { name: "TypeScript", category: "Language" },
+  { name: "TailwindCSS", category: "Styling" },
+  { name: "Framer Motion", category: "Motion" },
+  { name: "GSAP", category: "Motion" },
+  { name: "React Native", category: "Mobile" },
+  { name: "Node.js", category: "Backend" },
+  { name: "PostgreSQL", category: "Database" },
+  { name: "Prisma", category: "Database" },
+  { name: "GraphQL", category: "API" },
+  { name: "AWS", category: "Cloud" },
+  { name: "Docker", category: "Cloud" },
+  { name: "Vercel", category: "Cloud" },
+  { name: "Claude API", category: "AI" },
+  { name: "Figma", category: "Design" },
+  { name: "Shopify", category: "Commerce" },
+  { name: "Stripe", category: "Payments" },
+];
+
+export const whyChoose = [
+  {
+    title: "Design & engineering as one",
+    body: "No lossy handoff between a pretty mockup and a shipped product. The people who design it, build it.",
+  },
+  {
+    title: "Award-standard craft",
+    body: "We build every flagship to compete on Awwwards and the FWA. You get that standard, whatever the budget.",
+  },
+  {
+    title: "Business outcomes, not deliverables",
+    body: "We measure success in activation, conversion and retention — not in the number of screens we drew.",
+  },
+  {
+    title: "Senior team, no juniors hidden",
+    body: "You work directly with the people doing the work. Small studio, high signal, zero telephone game.",
+  },
+  {
+    title: "AI-native by default",
+    body: "We build with the latest models woven in where they remove real friction — not for the headline.",
+  },
+  {
+    title: "We stay after launch",
+    body: "Care plans, monitoring and continuous improvement. Your product keeps getting better, not stale.",
+  },
+];
+
+export const industries = [
+  { name: "Fintech", body: "Wealth, payments and lending products that inspire trust." },
+  { name: "Healthtech", body: "Patient and clinician experiences that improve outcomes." },
+  { name: "Ecommerce & Retail", body: "Storefronts engineered to convert and scale." },
+  { name: "SaaS & B2B", body: "Products people renew, from onboarding to power-user." },
+  { name: "Real Estate", body: "Immersive listings and portals that close faster." },
+  { name: "Education", body: "Learning platforms that keep learners coming back." },
+  { name: "Hospitality", body: "Booking and brand experiences worth travelling for." },
+  { name: "Enterprise", body: "Internal tools your teams don't dread opening." },
+];
+
+export const team = [
+  {
+    name: "Akash M G",
+    role: "Founder & Creative Technologist",
+    bio: "Bridges design and engineering — sets the studio's craft bar and leads every flagship build.",
+    initials: "AM",
+  },
+  {
+    name: "DesignHub",
+    role: "Product & Brand Design",
+    bio: "Research-led designers crafting interfaces and identities that feel inevitable.",
+    initials: "DH",
+  },
+  {
+    name: "DevHub",
+    role: "Full-stack & Mobile Engineering",
+    bio: "Type-safe, tested, performance-obsessed builders shipping production software.",
+    initials: "DV",
+  },
+  {
+    name: "ResearchHub",
+    role: "R&D, AI & Strategy",
+    bio: "Where raw problems get taken apart — research, prototypes and AI experiments that become tomorrow's solutions.",
+    initials: "RH",
+  },
+];
+
