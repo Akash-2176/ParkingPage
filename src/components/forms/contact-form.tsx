@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Check, Loader2, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/lib/site";
 
 const budgets = ["< ₹1L", "₹1L – ₹5L", "₹5L – ₹15L", "₹15L +"];
 const serviceOptions = [
@@ -35,6 +36,7 @@ type FormValues = z.infer<typeof schema>;
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
 
   const {
@@ -59,10 +61,35 @@ export function ContactForm() {
   };
 
   const onSubmit = async (data: FormValues) => {
-    // Placeholder submit — wire to Resend / EmailJS / an API route.
-    await new Promise((r) => setTimeout(r, 900));
-    console.log("Contact submission:", { ...data, file: fileName });
-    setSubmitted(true);
+    setSubmitError(false);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: siteConfig.web3formsKey,
+          subject: `New project enquiry — ${data.name}`,
+          from_name: "Ezura Arc Website",
+          name: data.name,
+          email: data.email,
+          company: data.company || "—",
+          services: data.services.join(", "),
+          budget: data.budget,
+          message: data.message,
+          // Web3Forms attachments need a paid plan — we pass the filename so
+          // you know a brief exists and can request it by reply.
+          attachment_note: fileName ?? "none",
+        }),
+      });
+      const json = await res.json();
+      if (json.success) setSubmitted(true);
+      else setSubmitError(true);
+    } catch {
+      setSubmitError(true);
+    }
   };
 
   if (submitted) {
@@ -93,15 +120,27 @@ export function ContactForm() {
     >
       <div className="grid gap-6 sm:grid-cols-2">
         <Field label="Your name" error={errors.name?.message}>
-          <input {...register("name")} placeholder="Jane Doe" className={inputCls} />
+          <input
+            {...register("name")}
+            placeholder="Jane Doe"
+            className={inputCls}
+          />
         </Field>
         <Field label="Email" error={errors.email?.message}>
-          <input {...register("email")} placeholder="jane@company.com" className={inputCls} />
+          <input
+            {...register("email")}
+            placeholder="jane@company.com"
+            className={inputCls}
+          />
         </Field>
       </div>
 
       <Field label="Company (optional)">
-        <input {...register("company")} placeholder="Company name" className={inputCls} />
+        <input
+          {...register("company")}
+          placeholder="Company name"
+          className={inputCls}
+        />
       </Field>
 
       <Field label="What do you need?" error={errors.services?.message}>
@@ -115,7 +154,7 @@ export function ContactForm() {
                 "rounded-full border px-4 py-2 text-sm transition-all",
                 selectedServices.includes(s)
                   ? "border-brand bg-brand text-white"
-                  : "border-border text-muted-foreground hover:border-brand/50"
+                  : "border-border text-muted-foreground hover:border-brand/50",
               )}
             >
               {s}
@@ -135,7 +174,7 @@ export function ContactForm() {
                 "rounded-full border px-4 py-2 text-sm transition-all",
                 selectedBudget === b
                   ? "border-brand bg-brand text-white"
-                  : "border-border text-muted-foreground hover:border-brand/50"
+                  : "border-border text-muted-foreground hover:border-brand/50",
               )}
             >
               {b}
@@ -144,7 +183,10 @@ export function ContactForm() {
         </div>
       </Field>
 
-      <Field label="Tell us about your project — or just the problem" error={errors.message?.message}>
+      <Field
+        label="Tell us about your project — or just the problem"
+        error={errors.message?.message}
+      >
         <textarea
           {...register("message")}
           rows={5}
@@ -175,6 +217,12 @@ export function ContactForm() {
           )}
         </Button>
       </div>
+      {submitError && (
+        <p className="text-sm text-brand">
+          Something went wrong sending your message. Please try again, or email
+          us directly at {siteConfig.email}.
+        </p>
+      )}
     </form>
   );
 }

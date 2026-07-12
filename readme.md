@@ -59,16 +59,20 @@ CMS-ready (swap the arrays for a headless CMS fetch when you're ready).
 
 Company details (address, phone, email, socials) live in `src/lib/site.ts`.
 
-## Things to wire before launch
+## Integrations
 
 These are intentionally stubbed with clear placeholders:
 
-- **Contact & career forms** — `src/components/forms/*` log to console. Connect Resend /
-  EmailJS or a Next route handler at the marked `// Placeholder submit`.
-- **Newsletter** — `src/components/layout/newsletter-form.tsx`.
-- **Analytics** — drop your GA4 / Plausible snippet at the marked spot in `layout.tsx`.
-- **Calendly** — links point at `https://calendly.com`; replace with your booking URL.
-- **WhatsApp** — already wired to `+91 9500264291` via `siteConfig.whatsapp`.
+- **Contact & career forms** — wired to **Web3Forms** (public access key in `src/lib/site.ts`). Submissions arrive at the inbox tied to that key. File attachments need aWeb3Forms paid plan, so forms send the filename only.
+- **Calendly** — booking links point to `siteConfig.calendly` (`https://calendly.com/hello-ezuraarc`) in the floating dock and contact page.
+- **WhatsApp** — wired to `+91 9500264291` via `siteConfig.whatsapp`.
+
+## Still to wire before launch
+
+- **Newsletter** — marked "Coming soon"; flip `COMING_SOON` in
+  `src/components/layout/newsletter-form.tsx` and connect your ESP.
+- **Careers** — no open roles; flip `HIRING_OPEN` in `src/app/careers/page.tsx`
+  to relist roles and re-enable the (already wired) application form.
 
 ## Brand
 

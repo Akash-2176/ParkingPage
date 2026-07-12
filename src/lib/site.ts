@@ -11,6 +11,9 @@ export const siteConfig = {
   phone: "+91 9500264291",
   phoneHref: "+919500264291",
   whatsapp: "919500264291",
+  calendly: "http://calendly.com/hello-ezuraarc",
+  //web3fromkey - public client key , safe to expose in client
+  web3formsKey: "7a23a01d-9f31-402a-b351-80b093d94540",
   address: {
     line1: "16/7a7 Vangalamman Nagar",
     line2: "Pasupathipalayam Kadaparai, Vennamalai",

@@ -85,16 +85,15 @@ export default function ContactPage() {
 
             <div className="rounded-4xl border border-dashed border-border p-6 text-center">
               <p className="text-sm text-muted-foreground">
-                Prefer to book a slot?{" "}
+                Prefer to talk it through?{" "}
                 <a
-                  href="https://calendly.com"
+                  href={siteConfig.calendly}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-brand underline-offset-2 hover:underline"
                 >
-                  Schedule a call
-                </a>{" "}
-                <span className="text-xs">(Calendly)</span>
+                  Book a free discovery call
+                </a>
               </p>
             </div>
           </div>

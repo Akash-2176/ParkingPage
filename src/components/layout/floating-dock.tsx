@@ -38,7 +38,7 @@ export function FloatingDock() {
     {
       label: "Book a call",
       icon: Calendar,
-      href: "https://calendly.com", // Calendly placeholder
+      href: siteConfig.calendly,
       className: "border border-border bg-card text-foreground",
     },
   ];
