@@ -125,10 +125,18 @@ export default async function ProjectDetail({
       <section className="bg-ink-950 py-20 text-white lg:py-28">
         <div className="container-x">
           <Eyebrow>Impact</Eyebrow>
-          <div className="mt-10 grid grid-cols-2 gap-8 lg:grid-cols-4">
+          {/* `min-w-0` + `break-words`: word metrics like "End-to-end" or
+              "Centralized" at text-4xl set an intrinsic minimum wider than a
+              2-column cell on a 375px screen, which pushed the whole page into
+              horizontal scroll. Numeric metrics ("750+") were never affected —
+              this only shows up on the word-based ones. */}
+          <div className="mt-10 grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
             {project.metrics.map((m) => (
-              <div key={m.label} className="flex flex-col gap-2 border-l border-white/15 pl-5">
-                <span className="font-display text-4xl font-semibold text-white md:text-5xl">
+              <div
+                key={m.label}
+                className="flex min-w-0 flex-col gap-2 border-l border-white/15 pl-4 sm:pl-5"
+              >
+                <span className="font-display text-2xl font-semibold text-white [overflow-wrap:anywhere] sm:text-4xl md:text-5xl">
                   {m.value}
                 </span>
                 <span className="text-sm text-white/60">{m.label}</span>

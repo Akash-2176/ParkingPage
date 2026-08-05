@@ -170,6 +170,17 @@ html.no-hydrate [data-reveal] {
   transform: none !important;
 }
 
+/* Last-resort guard against sideways scroll.
+   Individual overflows are fixed at the component level (see project-card and
+   the metric grids), but one long unbreakable string anywhere on the page
+   shouldn't be able to shift the entire layout on a phone. This clips it
+   instead. Wide things that SHOULD scroll must scroll inside their own
+   overflow-x-auto container, not the document. */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }

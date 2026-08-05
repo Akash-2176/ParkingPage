@@ -44,14 +44,17 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
             <ArrowUpRight className="h-5 w-5" />
           </div>
         </div>
-        <div className="mt-5 flex items-start justify-between gap-4">
-          <div>
+        {/* Stacked on phones: a category like "Government · Web & Mobile
+            Platform" is ~270px, so side-by-side with shrink-0 + nowrap forced
+            the card past a 375px viewport and the whole page scrolled sideways. */}
+        <div className="mt-5 flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+          <div className="min-w-0 order-2 sm:order-1">
             <h3 className="font-display text-2xl font-semibold text-foreground">
               {project.title}
             </h3>
             <p className="mt-1 text-sm text-muted-foreground">{project.summary}</p>
           </div>
-          <span className="shrink-0 whitespace-nowrap text-xs font-medium uppercase tracking-wider text-brand">
+          <span className="order-1 text-xs font-medium uppercase tracking-wider text-brand sm:order-2 sm:shrink-0 sm:whitespace-nowrap">
             {project.category}
           </span>
         </div>
