@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Project } from "@/data/portfolio";
@@ -20,11 +21,22 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
         className="group block"
       >
         <div className="relative overflow-hidden rounded-4xl">
-          <GradientCover
-            from={project.cover.from}
-            to={project.cover.to}
-            className="aspect-[4/3] transition-transform duration-700 group-hover:scale-[1.03]"
-          />
+          {project.coverImage ? (
+            <Image
+              src={project.coverImage}
+              alt={project.title}
+              width={800}
+              height={600}
+              style={{ background: project.coverBg || "transparent" }}
+              className="aspect-[4/3] w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+            />
+          ) : (
+            <GradientCover
+              from={project.cover.from}
+              to={project.cover.to}
+              className="aspect-[4/3] transition-transform duration-700 group-hover:scale-[1.03]"
+            />
+          )}
           <div className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all duration-300 group-hover:bg-white group-hover:text-ink-900">
             <ArrowUpRight className="h-5 w-5" />
           </div>

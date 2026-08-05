@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ArrowUpRight, Quote } from "lucide-react";
 import { projects, getProject } from "@/data/portfolio";
 import { GradientCover } from "@/components/ui/gradient-cover";
@@ -79,11 +80,22 @@ export default async function ProjectDetail({
       {/* Hero cover */}
       <section className="container-x py-12">
         <Reveal>
-          <GradientCover
-            from={project.cover.from}
-            to={project.cover.to}
-            className="aspect-[16/9]"
-          />
+          {project.coverImage ? (
+            <Image
+              src={project.coverImage}
+              alt={project.title}
+              width={1600}
+              height={900}
+              style={{ background: project.coverBg || "transparent" }}
+              className="aspect-[16/9] w-full h-full rounded-4xl object-contain"
+            />
+          ) : (
+            <GradientCover
+              from={project.cover.from}
+              to={project.cover.to}
+              className="aspect-[16/9]"
+            />
+          )}
         </Reveal>
       </section>
 
@@ -130,7 +142,26 @@ export default async function ProjectDetail({
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {project.gallery.map((g, i) => (
             <Reveal key={i} delay={i * 0.08}>
-              <GradientCover from={g.from} to={g.to} label={g.label} className="aspect-[3/4]" />
+              {g.image ? (
+                <div className="relative overflow-hidden rounded-4xl bg-[#F6F0E7]">
+                  <Image 
+                    src={g.image} 
+                    alt={g.label} 
+                    width={600} 
+                    height={800} 
+                    className="aspect-[3/4] w-full object-contain" 
+                  />
+                  {g.label && (
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-5 pt-12">
+                      <span className="text-sm font-medium text-white/90">
+                        {g.label}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <GradientCover from={g.from} to={g.to} label={g.label} className="aspect-[3/4]" />
+              )}
             </Reveal>
           ))}
         </div>

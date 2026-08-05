@@ -8,12 +8,14 @@ export type Project = {
   services: string[];
   summary: string;
   cover: { from: string; to: string }; // gradient stops
+  coverImage?: string; // optional image path (in /public)
+  coverBg?: string; // optional background color for images
   overview: string;
   problem: string;
   solution: string;
   tech: string[];
   metrics: { value: string; label: string }[];
-  gallery: { from: string; to: string; label: string }[];
+  gallery: { from: string; to: string; label: string; image?: string }[];
   beforeAfter: { before: string; after: string };
   testimonial?: { quote: string; author: string; role: string };
   liveUrl?: string;
@@ -26,24 +28,65 @@ export type Project = {
  * or keep them confidential.
  */
 export const projects: Project[] = [
+
+
   {
-    slug: "project-halo",
-    title: "Project Halo",
+    slug: "vc-police-portal",
+    title: "VC Police Portal",
+    client: "Under NDA",
+    category: "GOVERNMENT · WEB & MOBILE PLATFORM",
+    year: " Sep 2024",
+    confidential: true,
+    services: ["Public Safety", "Web App", "Mobile App"],
+    summary:
+      "A centralized platform for managing Vinayagar idol registrations, immersion routes, and festival operations.",
+    cover: { from: "#FF5A2E", to: "#434A5C" },
+    coverImage: "/portfolio/vc-police-portal/vc-police-portal-overview.png",
+    coverBg: "#F8F8F9",
+    overview:
+      "The VC Police Portal was developed to digitize the planning and monitoring of Vinayagar idol installation and immersion activities. By providing a unified platform for registration management, route monitoring, and operational oversight, the system helps police authorities coordinate efficiently and maintain public safety during large-scale festivals.",
+    problem:
+      "Managing thousands of idol registrations and immersion events through manual processes made it difficult for police departments to maintain accurate records, monitor sensitive locations, and coordinate field officers. Limited visibility across jurisdictions increased administrative effort and delayed operational decision-making during high-traffic festival periods.",
+    solution:
+      "We built an integrated web and mobile platform that centralizes idol registration, applicant verification, route tracking, and operational monitoring. With role-based access, interactive dashboards, map visualization, and real-time data filtering, the portal enables police officials to oversee festival activities efficiently while improving coordination across departments.",
+    tech: ["React.js", "React Native", "Express.js", "MongoDB","AWS"],
+    metrics: [
+      { value: "Centralized", label: "One platform for all festival monitoring" },
+      { value: "Real-time", label: "Live updates across all devices" },
+      { value: "Coordinated", label: "Connected operations across police departments" },
+      { value: "Safer", label: "Improved planning for public safety" },
+    ],
+    gallery: [
+      { from: "#FF5A2E", to: "#434A5C", label: "Dashboard", image : "/portfolio/vc-police-portal/sp-dashboard.png" },
+      { from: "#2E3340", to: "#0E0F14", label: "Sp-Registration and View", image : "/portfolio/vc-police-portal/sp-view.png" },
+      { from: "#FF7A4E", to: "#C42F09", label: "SP-Map View", image : "/portfolio/vc-police-portal/map-page.png" },
+    ],
+    beforeAfter: {
+      before: "Manual registration processes, fragmented records, and limited operational visibility made it difficult to coordinate festival security and monitor idol immersion activities effectively.",
+      after: "A centralized platform that provides real-time visibility into registrations, immersion routes, and field operations, enabling faster coordination and more informed decision-making across police departments.",
+    },
+  },
+
+  {
+    slug: "tmca",
+    title: "TMCA",
     client: "Under NDA",
     category: "Fintech · Web App",
     year: "2026",
     confidential: true,
     services: ["Product Design", "Web App", "Design System"],
     summary:
-      "A confidential fintech dashboard — we turned a dense, anxiety-inducing tool into a calm, glanceable experience.",
+      "A secure client onboarding and compliance platform built for Chartered Accountants—streamlining document collection, automating financial workflows, and bringing every stage of the filing lifecycle into a single, centralized workspace.",
     cover: { from: "#FF7A4E", to: "#ED3F0F" },
+    coverImage: "/portfolio/TMCA/tmca-overview.png",
+    coverBg: "#F6F0E7",
     overview:
-      "An early-stage fintech partner asked us to reimagine their core product from the ground up — brand-adjacent, design-led, and engineered to grow. Client details are withheld under NDA.",
+      "A CA firm needed a single workspace to replace scattered client emails, manual follow-ups, and disconnected compliance tools. We redesigned the entire workflow from document collection and verification to financial analysis and filing, creating an end-to-end system that reduced back-and-forth and brought every critical step into one secure interface.",
     problem:
-      "The original product buried its most useful insight under dense tables. New users felt overwhelmed in the first session, and the team couldn't ship changes without a developer.",
+      "Before TMCA, client data lived across emails, WhatsApp threads, and scattered cloud folders. Compliance tasks were manual, repetitive, and hard to track, making it difficult for Chartered Accountants to maintain accuracy, ensure security, and deliver timely services to clients.",
     solution:
-      "We reframed the whole experience around a single question — 'am I on track?' — with a glanceable dashboard, progressive disclosure, and a componentised system the team can extend themselves.",
-    tech: ["Next.js", "TypeScript", "tRPC", "PostgreSQL", "Framer Motion"],
+      "We rebuilt the entire workflow from the ground up—starting with a secure client onboarding portal for document submission, followed by a centralized compliance hub where every verification step, financial calculation, and filing task lived in one place. The result is a seamless, end-to-end workspace that eliminates scattered data, reduces manual work, and ensures accuracy and compliance at every stage of the client lifecycle.",
+    tech: ["Next.js", "TypeScript", "NestJS", "Python", "Supabase", "Prisma ORM", "AWS", "Amazon S3", "Amazon SQS"],
     metrics: [
       { value: "1 team", label: "Founder-led delivery" },
       { value: "6 wks", label: "Concept to live MVP" },
@@ -51,81 +94,49 @@ export const projects: Project[] = [
       { value: "0", label: "Design-to-dev handoffs lost" },
     ],
     gallery: [
-      { from: "#FF7A4E", to: "#ED3F0F", label: "Dashboard overview" },
-      { from: "#434A5C", to: "#1B1E27", label: "Insights, simplified" },
-      { from: "#FF9C77", to: "#FF5A2E", label: "Mobile companion" },
+      { from: "#FF7A4E", to: "#ED3F0F", label: "Dashboard overview", image: "/portfolio/TMCA/tmca-dashboard.png" },
+      { from: "#434A5C", to: "#1B1E27", label: "Insights, simplified", image: "/portfolio/TMCA/team-overview.png" },
+      { from: "#FF9C77", to: "#FF5A2E", label: "Mobile companion", image: "/portfolio/TMCA/mobile-view.png" },
     ],
     beforeAfter: {
-      before: "Dense multi-column tables and a confusing first session.",
-      after: "One glanceable answer and a product the team can evolve on their own.",
+      before: "Manual onboarding, fragmented document management, and disconnected filing workflows created operational bottlenecks, limiting visibility and increasing compliance risks for accounting teams.",
+      after: "A unified CA compliance platform that digitizes the entire client lifecycle—from secure document collection and automated verification to financial analysis and final filing, ensuring greater accuracy, transparency, and efficiency.",
     },
   },
-  {
-    slug: "project-loom",
-    title: "Project Loom",
+    {
+    slug: "puppy-digital-mart",
+    title: "Puppy Digital Mart",
     client: "Under NDA",
     category: "Ecommerce · Brand",
     year: "2025",
     confidential: true,
-    services: ["Brand Direction", "Headless Ecommerce", "Motion"],
+    services: ["Marketplace", "E-Commerce", "Web App"],
     summary:
-      "A confidential D2C storefront — an editorial, headless commerce experience that makes premium products feel premium.",
+      "Connecting local businesses with customers through a unified digital marketplace for their products.",
     cover: { from: "#434A5C", to: "#1B1E27" },
+    coverImage: "/portfolio/puppy-digital-mart/puppy-digital-overview.png",
+    coverBg: "#F4F8FD",
     overview:
-      "A growing direct-to-consumer brand came to us to move off a generic template and onto a store that matched the quality of their product. Client details are withheld under NDA.",
+      "Puppy Digital Mart was created to help local vendors embrace digital commerce through a centralized marketplace for gift cards. The platform enables businesses to showcase their offerings, manage digital vouchers, and connect with a wider customer base through a seamless online purchasing experience.",
     problem:
-      "A cookie-cutter theme made considered, high-ticket products feel like commodities, and the mobile experience was slow and forgettable.",
+      "Local retailers struggled to reach customers beyond their physical stores, and customers had limited access to discover and purchase gift cards from nearby businesses. The lack of a unified digital platform created friction for both merchants seeking growth and customers looking for convenient gifting options.",
     solution:
-      "We art-directed every product as a story, added buttery scroll and fast two-tap mobile checkout, and built it headless so the storefront and catalogue can evolve independently.",
+      "We enabled local retailers to showcase their gift cards on a unified marketplace, creating a seamless online platform for customers to discover and purchase vouchers. The system streamlined gift card management and accessibility, empowering businesses to expand their reach and customers to easily support local merchants through digital gifting.",
     tech: ["Next.js", "Shopify (headless)", "TailwindCSS", "GSAP", "Razorpay"],
     metrics: [
-      { value: "2-tap", label: "Mobile checkout" },
-      { value: "98", label: "Lighthouse score" },
-      { value: "< 1s", label: "Time to interactive" },
-      { value: "Headless", label: "Future-proof stack" },
+      { value: "Connected", label: "Bringing local businesses and customers together" },
+      { value: "Digital", label: "Digital gifting made simple" },
+      { value: "Streamlined", label: "Streamlined gift card management" },
+      { value: "Expanded", label: "Expanded reach for local retailers" },
     ],
     gallery: [
-      { from: "#434A5C", to: "#1B1E27", label: "Editorial home" },
-      { from: "#8A90A0", to: "#434A5C", label: "Product story" },
-      { from: "#FF5A2E", to: "#8F2409", label: "Two-tap checkout" },
+      { from: "#434A5C", to: "#1B1E27", label: "Redemption Requests", image : "/portfolio/puppy-digital-mart/redemption-requests.png" },
+      { from: "#8A90A0", to: "#434A5C", label: "Product story", image : "/portfolio/puppy-digital-mart/user-management.png" },
+      { from: "#FF5A2E", to: "#8F2409", label: "Two-tap checkout", image : "/portfolio/puppy-digital-mart/home.png" },
     ],
     beforeAfter: {
-      before: "A template store where premium products looked ordinary.",
-      after: "An editorial showroom that loads instantly and converts on mobile.",
-    },
-  },
-  {
-    slug: "project-atlas",
-    title: "Project Atlas",
-    client: "Under NDA",
-    category: "SaaS · AI",
-    year: "2025",
-    confidential: true,
-    services: ["AI Feature", "Web App", "UX"],
-    summary:
-      "A confidential internal tool with a grounded AI assistant — one people actually trust with real decisions.",
-    cover: { from: "#FF5A2E", to: "#434A5C" },
-    overview:
-      "A team drowning in scattered documents wanted an assistant that could answer questions from their own knowledge — without making things up. Client details are withheld under NDA.",
-    problem:
-      "Off-the-shelf AI chat hallucinated on internal data, so the team simply didn't trust it, and adoption never got off the ground.",
-    solution:
-      "We built retrieval over their knowledge base with inline citations and a small evaluation harness to measure answer quality — so the assistant earns trust by showing its work.",
-    tech: ["Next.js", "Claude API", "Vector search", "Vercel AI SDK"],
-    metrics: [
-      { value: "Cited", label: "Every answer sourced" },
-      { value: "Evals", label: "Quality measured, not guessed" },
-      { value: "RAG", label: "Grounded in their data" },
-      { value: "Private", label: "No training on your data" },
-    ],
-    gallery: [
-      { from: "#FF5A2E", to: "#434A5C", label: "Cited answers" },
-      { from: "#2E3340", to: "#0E0F14", label: "Evaluation view" },
-      { from: "#FF7A4E", to: "#C42F09", label: "Knowledge search" },
-    ],
-    beforeAfter: {
-      before: "A generic AI chat that hallucinated and earned zero trust.",
-      after: "A grounded, cited assistant the team relies on daily.",
+      before: "Local vendors relied on fragmented sales channels with limited digital visibility, making it difficult to promote and sell gift cards effectively.",
+      after: "A centralized marketplace that connects customers with local businesses, enabling secure gift card purchases, simplified vendor management, and increased digital reach.",
     },
   },
 ];

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { PageHeader } from "@/components/ui/page-header";
 import { CtaSection } from "@/components/home/cta-section";
@@ -30,7 +31,18 @@ export default function CaseStudiesPage() {
                 data-cursor="Read"
                 className="group grid gap-8 rounded-5xl border border-border bg-card p-6 transition-colors hover:border-brand/40 lg:grid-cols-2 lg:p-8"
               >
-                <GradientCover from={p.cover.from} to={p.cover.to} className="aspect-[16/10]" />
+                {p.coverImage ? (
+                  <Image
+                    src={p.coverImage}
+                    alt={p.title}
+                    width={800}
+                    height={500}
+                    style={{ background: p.coverBg || "transparent" }}
+                    className="aspect-[16/10] w-full h-full rounded-4xl object-contain"
+                  />
+                ) : (
+                  <GradientCover from={p.cover.from} to={p.cover.to} className="aspect-[16/10]" />
+                )}
                 <div className="flex flex-col justify-center gap-4">
                   <span className="text-xs font-medium uppercase tracking-wider text-brand">
                     {p.category} · {p.year}
