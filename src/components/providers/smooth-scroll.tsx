@@ -19,7 +19,11 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       options={{
         lerp: 0.09,
         duration: 1.2,
+        // Wheel only. Touch scrolling stays 100% native — on iOS Safari,
+        // momentum scroll runs off the main thread, and intercepting it to
+        // re-drive scroll from a rAF loop is what makes WebKit feel laggy.
         smoothWheel: true,
+        syncTouch: false,
         wheelMultiplier: 1,
         touchMultiplier: 1.6,
       }}

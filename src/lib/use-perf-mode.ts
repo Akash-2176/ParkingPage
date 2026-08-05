@@ -36,7 +36,22 @@ export function usePerfMode() {
         !!conn?.saveData ||
         (!!conn?.effectiveType && /^(slow-)?2g$|^3g$/.test(conn.effectiveType));
 
-      setReduce(mq.matches || cores <= 4 || memory <= 4 || slowNet);
+      // Safari exposes neither deviceMemory nor connection, so every iPhone and
+      // Mac previously fell through to "capable" and kept the full effect stack.
+      // Touch WebKit is exactly where the JS scroll hijack and the springs hurt
+      // most — iOS momentum scrolling is handled off the main thread natively,
+      // and Lenis replaces that with a main-thread rAF loop.
+      const isWebKit =
+        typeof CSS !== "undefined" && CSS.supports("-webkit-hyphens: none");
+      const isTouch = matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+      setReduce(
+        mq.matches ||
+          cores <= 4 ||
+          memory <= 4 ||
+          slowNet ||
+          (isWebKit && isTouch),
+      );
     };
 
     evaluate();

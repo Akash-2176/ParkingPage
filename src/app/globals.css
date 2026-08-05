@@ -90,6 +90,17 @@
     @apply border border-white/15 bg-white/60 backdrop-blur-xl dark:border-white/10 dark:bg-white/5;
   }
 
+  /* Safari repaints backdrop-filter against a live backdrop, and this element
+     is the sticky navbar — so it re-blurs on every scroll frame. WebKit is the
+     only engine where that reliably drops frames, so swap in a solid surface
+     there. `-webkit-hyphens` is a WebKit-only property, which makes this an
+     effective Safari/iOS target without user-agent sniffing. */
+  @supports (-webkit-hyphens: none) {
+    .glass {
+      @apply bg-white/90 backdrop-blur-none dark:bg-ink-950/90;
+    }
+  }
+
   .card-surface {
     @apply rounded-4xl border border-border bg-card;
   }
@@ -105,14 +116,21 @@
     @apply w-full;
   }
 
+  /* Static 128px tile instead of an inline feTurbulence SVG.
+     Safari/WebKit rasterises SVG filters on the CPU and cannot cache them the
+     way it caches a bitmap, so the old version repainted ~0.7MP of procedural
+     noise (2.7MP at Retina DPR 2) on every scroll frame. `mix-blend-mode` made
+     it worse: any blend forces the element and its backdrop into a non-fast
+     composite path. A tiled PNG at low opacity looks the same and is free. */
   .noise::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.4;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.22;
+    background-image: url("/noise.png");
+    background-repeat: repeat;
+    background-size: 128px 128px;
   }
 }
 
@@ -176,7 +194,10 @@ html.no-hydrate [data-reveal] {
    shouldn't be able to shift the entire layout on a phone. This clips it
    instead. Wide things that SHOULD scroll must scroll inside their own
    overflow-x-auto container, not the document. */
-html, body {
+/* `overflow-x: hidden` is set on body only, NOT html. On iOS Safari, putting it
+   on the root element makes the document a scroll container and can break
+   momentum scrolling and scroll-anchoring. */
+body {
   overflow-x: hidden;
   max-width: 100%;
 }

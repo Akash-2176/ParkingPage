@@ -97,7 +97,10 @@ export function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] bg-ink-950/95 backdrop-blur-2xl lg:hidden"
+            // bg is already 95% opaque, so the full-viewport backdrop-blur was
+            // buying almost nothing visually while forcing WebKit to blur the
+            // entire page behind it. Dropped to a solid panel.
+            className="fixed inset-0 z-[200] bg-ink-950/[0.98] lg:hidden"
           >
             <div className="container-x flex h-full flex-col py-6">
               <div className="flex items-center justify-between">

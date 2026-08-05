@@ -44,10 +44,22 @@ export function Hero() {
       className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-28"
     >
       <FloatingOrbs />
-      <div className="pointer-events-none absolute inset-0 bg-mesh" />
+      {/* Three stacked radial gradients over ~1.1MP. `translateZ(0)` pins it to
+          its own rasterised layer so WebKit paints the gradients once rather
+          than re-evaluating them while the hero parallaxes over the top. */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-mesh"
+        style={{ transform: "translateZ(0)" }}
+      />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/40 to-transparent" />
 
-      <motion.div style={{ y, opacity }} className="container-x relative">
+      {/* `willChange: transform` keeps this on its own compositor layer.
+          Without it WebKit repaints the hero's text, mesh and orbs together on
+          every scroll tick instead of just translating a cached layer. */}
+      <motion.div
+        style={{ y, opacity, willChange: "transform, opacity" }}
+        className="container-x relative"
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
