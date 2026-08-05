@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { usePerfMode } from "@/lib/use-perf-mode";
 
 /**
  * Minimal, premium cursor: a small precise dot plus a thin trailing ring,
@@ -10,6 +11,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
  * Auto-disabled on touch / coarse-pointer devices.
  */
 export function CustomCursor() {
+  const lite = usePerfMode();
   const [enabled, setEnabled] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [down, setDown] = useState(false);
@@ -26,18 +28,31 @@ export function CustomCursor() {
     const fine =
       typeof window !== "undefined" &&
       window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (!fine) return;
+    // The whole overlay sits under mix-blend-difference, so every cursor move
+    // repaints a full-viewport composited layer. On weak integrated graphics
+    // that alone can hold a frame; the native cursor is strictly better there.
+    if (!fine || lite) return;
     setEnabled(true);
     document.documentElement.classList.add("cursor-none-desktop");
 
+    let queued = false;
+    let last: MouseEvent | null = null;
     const move = (e: MouseEvent) => {
       x.set(e.clientX);
       y.set(e.clientY);
       setHidden(false);
-      const el = (e.target as HTMLElement)?.closest(
-        "a, button, [data-cursor], input, textarea, select, label, [role='button']"
-      );
-      setHovering(!!el);
+      // `closest()` walks the ancestor chain on every mousemove — at 120Hz
+      // that is thousands of tree walks a second. Coalesce to one per frame.
+      last = e;
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        const el = (last?.target as HTMLElement)?.closest(
+          "a, button, [data-cursor], input, textarea, select, label, [role='button']"
+        );
+        setHovering(!!el);
+      });
     };
     const leave = () => setHidden(true);
     const onDown = () => setDown(true);
@@ -54,7 +69,7 @@ export function CustomCursor() {
       document.removeEventListener("mouseleave", leave);
       document.documentElement.classList.remove("cursor-none-desktop");
     };
-  }, [x, y]);
+  }, [x, y, lite]);
 
   if (!enabled) return null;
 

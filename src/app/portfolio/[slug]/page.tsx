@@ -74,24 +74,31 @@ export default async function ProjectDetail({
 
       {/* Hero cover */}
       <section className="container-x py-12">
-        <Reveal>
-          {project.coverImage ? (
-            <Image
-              src={project.coverImage}
-              alt={project.title}
-              width={1600}
-              height={900}
-              style={{ background: project.coverBg || "transparent" }}
-              className="aspect-[16/9] w-full h-full rounded-4xl object-contain"
-            />
-          ) : (
+        {/* NOT wrapped in <Reveal>: this is the LCP element. A Reveal starts at
+            opacity:0 and only fades in once Framer hydrates, so on a throttled
+            CPU the largest paint waits on the whole JS bundle — it measured
+            7.4s at 6x slowdown. `priority` also puts it in the initial preload
+            scan instead of letting the lazy loader discover it after layout. */}
+        {project.coverImage ? (
+          <Image
+            src={project.coverImage}
+            alt={project.title}
+            width={1600}
+            height={900}
+            priority
+            fetchPriority="high"
+            style={{ background: project.coverBg || "transparent" }}
+            className="aspect-[16/9] w-full h-full rounded-4xl object-contain"
+          />
+        ) : (
+          <Reveal>
             <GradientCover
               from={project.cover.from}
               to={project.cover.to}
               className="aspect-[16/9]"
             />
-          )}
-        </Reveal>
+          </Reveal>
+        )}
       </section>
 
       {/* Overview / problem / solution */}

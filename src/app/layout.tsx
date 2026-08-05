@@ -12,6 +12,7 @@ import { LoadingScreen } from "@/components/layout/loading-screen";
 import { FloatingDock } from "@/components/layout/floating-dock";
 import { CookieConsent } from "@/components/layout/cookie-consent";
 import { PageTransition } from "@/components/layout/page-transition";
+import { HydrationGate } from "@/components/providers/hydration-gate";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -116,6 +117,21 @@ const orgJsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${fontDisplay.variable} ${fontSans.variable}`}>
+      <head>
+        {/*
+          Reveal fail-safe. If React hasn't hydrated within 2.5s — broken JS, or
+          a phone so slow it may as well be — this adds `no-hydrate`, and
+          globals.css then forces every [data-reveal] block visible. The page can
+          never end up permanently blank below the hero.
+          HydrationGate cancels the timer the moment React is actually running,
+          so on any healthy load this never fires.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__ezRevealFailsafe=setTimeout(function(){document.documentElement.classList.add('no-hydrate')},2500);`,
+          }}
+        />
+      </head>
       <body>
         <Script
           id="org-jsonld"
@@ -124,6 +140,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         {/* Analytics placeholder — drop your GA4 / Plausible snippet here. */}
         <ThemeProvider>
+          <HydrationGate />
           <LoadingScreen />
           <CustomCursor />
           <SmoothScroll>

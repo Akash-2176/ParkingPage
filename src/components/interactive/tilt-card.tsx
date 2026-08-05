@@ -3,6 +3,7 @@
 import { useRef, type ReactNode } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { usePerfMode } from "@/lib/use-perf-mode";
 
 /**
  * 3D tilt on pointer move with a soft glare that follows the cursor.
@@ -17,6 +18,7 @@ export function TiltCard({
   intensity?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const lite = usePerfMode();
   const px = useMotionValue(0.5);
   const py = useMotionValue(0.5);
 
@@ -42,6 +44,19 @@ export function TiltCard({
     py.set(0.5);
   };
 
+  // Hook must run unconditionally — it's declared before the lite early-return
+  // below so the hook order stays identical on every render.
+  const glare = useTransform(
+    [glareX, glareY],
+    ([gx, gy]) =>
+      `radial-gradient(320px circle at ${gx} ${gy}, rgba(255,90,46,0.18), transparent 60%)`
+  );
+
+  // 3D rotation forces a new compositing layer per card and the glare repaints
+  // a large gradient on every pointer move. Hover-only, so drop it on low-end
+  // and touch devices where it costs without ever being seen.
+  if (lite) return <div className={cn("relative", className)}>{children}</div>;
+
   return (
     <motion.div
       ref={ref}
@@ -53,13 +68,7 @@ export function TiltCard({
       {children}
       <motion.span
         aria-hidden
-        style={{
-          background: useTransform(
-            [glareX, glareY],
-            ([gx, gy]) =>
-              `radial-gradient(320px circle at ${gx} ${gy}, rgba(255,90,46,0.18), transparent 60%)`
-          ),
-        }}
+        style={{ background: glare }}
         className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
       />
     </motion.div>

@@ -39,6 +39,7 @@ export default function CaseStudiesPage() {
                     alt={p.title}
                     width={800}
                     height={500}
+                    priority={i === 0}
                     style={{ background: p.coverBg || "transparent" }}
                     className="aspect-[16/10] w-full h-full rounded-4xl object-contain"
                   />

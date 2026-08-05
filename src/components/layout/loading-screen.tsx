@@ -16,8 +16,27 @@ export function LoadingScreen() {
       setDone(true);
       return;
     }
+    // The reduced-motion CSS override only reaches CSS animations, not this
+    // JS timer — so skip the intro entirely when it's requested.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      sessionStorage.setItem("ez-loaded", "1");
+      setDone(true);
+      return;
+    }
     // Timer-driven (not rAF) so it can never stall in a throttled/background tab.
-    const DURATION = 1500;
+    // On a slow device the user has already waited on the network and on JS
+    // parse before this even starts, so a fixed 1.5s vanity hold lands on top
+    // of a wait they've already served. Cut it short where it hurts most.
+    const nav = navigator as Navigator & {
+      deviceMemory?: number;
+      connection?: { saveData?: boolean; effectiveType?: string };
+    };
+    const weak =
+      (nav.hardwareConcurrency ?? 8) <= 4 ||
+      (nav.deviceMemory ?? 8) <= 4 ||
+      !!nav.connection?.saveData ||
+      /^(slow-)?2g$|^3g$/.test(nav.connection?.effectiveType ?? "");
+    const DURATION = weak ? 400 : 1500;
     const startedAt = Date.now();
     const interval = setInterval(() => {
       const p = Math.min((Date.now() - startedAt) / DURATION, 1);

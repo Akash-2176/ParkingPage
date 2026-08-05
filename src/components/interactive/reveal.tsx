@@ -29,6 +29,7 @@ export function Reveal({
   const anim = { opacity: 1, y: 0 };
   return (
     <motion.div
+      data-reveal
       className={className}
       initial={{ opacity: 0, y }}
       {...(immediate

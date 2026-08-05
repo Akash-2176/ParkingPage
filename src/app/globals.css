@@ -147,6 +147,27 @@ html.lenis, html.lenis body { height: auto; }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+  /* Framer writes opacity/transform as INLINE styles, which beat the rules
+     above. Without this, a reduced-motion user gets the reveal's start state
+     (invisible) and nothing ever animates it in. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Safety net for reveals.
+   Reveals start at opacity:0 (an inline style from Framer) and rely on JS to
+   fade them in. On a throttled CPU hydration can take seconds; if it fails,
+   they never appear at all and the page looks broken below the hero.
+
+   `html.no-hydrate` is set by an inline script in the document head and removed
+   the moment React hydrates. If hydration never happens, the class stays and
+   these !important rules — which DO outrank inline styles — force the content
+   visible. In the normal case the class is gone long before anyone sees this. */
+html.no-hydrate [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* Custom scrollbar */

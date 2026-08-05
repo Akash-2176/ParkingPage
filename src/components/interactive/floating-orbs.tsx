@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { usePerfMode } from "@/lib/use-perf-mode";
 
 /**
  * Floating orange geometric elements inspired by the logo arc.
@@ -10,6 +11,7 @@ import { cn } from "@/lib/utils";
  */
 export function FloatingOrbs({ className }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const lite = usePerfMode();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -22,6 +24,23 @@ export function FloatingOrbs({ className }: { className?: string }) {
     stiffness: 60,
     damping: 20,
   });
+
+  // Low-end path: same composition, but static. Two 90–120px blurs over a
+  // ~300px box are re-rasterised every frame when they move, which is what
+  // makes scrolling feel gluey on integrated graphics. Held still, the GPU
+  // rasterises each once and reuses it. The look barely changes; the cost does.
+  if (lite) {
+    return (
+      <div
+        aria-hidden
+        className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+      >
+        <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-brand/25 blur-[70px]" />
+        <div className="absolute right-[-6rem] top-1/3 h-96 w-96 rounded-full bg-brand-400/20 blur-[80px]" />
+        <div className="absolute right-[14%] top-[18%] h-4 w-4 rounded-full bg-brand" />
+      </div>
+    );
+  }
 
   return (
     <div

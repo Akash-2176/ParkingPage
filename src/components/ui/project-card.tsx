@@ -27,6 +27,9 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
               alt={project.title}
               width={800}
               height={600}
+              // The first card is above the fold and is usually the page's LCP;
+              // preload it and leave the rest to the lazy loader.
+              priority={index === 0}
               style={{ background: project.coverBg || "transparent" }}
               className="aspect-[4/3] w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
             />
