@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/site";
 import { PageHeader } from "@/components/ui/page-header";
 import { ProcessSection } from "@/components/home/process-section";
 import { FaqSection } from "@/components/home/faq-section";
@@ -6,11 +7,12 @@ import { CtaSection } from "@/components/home/cta-section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/interactive/reveal";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Process",
   description:
     "How Ezura Arc works — a deliberate four-phase process from discovery to launch, built for craft and clarity.",
-};
+  path: "/process",
+});
 
 const principles = [
   { title: "Weekly momentum", body: "You see progress every week — demos, not status reports." },

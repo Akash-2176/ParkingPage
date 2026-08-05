@@ -9,7 +9,7 @@ import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { CtaSection } from "@/components/home/cta-section";
 import { Reveal, Stagger, StaggerItem } from "@/components/interactive/reveal";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, pageMeta } from "@/lib/site";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -23,11 +23,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
-  return {
+  return pageMeta({
     title: service.title,
     description: service.description,
-    openGraph: { title: `${service.title} — ${siteConfig.name}`, description: service.description },
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServiceDetail({

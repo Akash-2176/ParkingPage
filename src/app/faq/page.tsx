@@ -3,12 +3,14 @@ import { PageHeader } from "@/components/ui/page-header";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { CtaSection } from "@/components/home/cta-section";
 import { faqs } from "@/data/faq";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "FAQ",
-  description: "Answers to the questions we're asked most about working with Ezura Arc.",
-};
+  description:
+    "Answers to the questions we're asked most about working with Ezura Arc.",
+  path: "/faq",
+});
 
 const faqJsonLd = {
   "@context": "https://schema.org",

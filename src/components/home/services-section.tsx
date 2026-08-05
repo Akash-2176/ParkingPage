@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { services } from "@/data/services";
+import { coreServices } from "@/data/services";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { cn } from "@/lib/utils";
 
 export function ServicesSection() {
-  // 9 services = a perfect 3×3 grid on desktop; Maintenance lives on /services.
-  const featured = services.filter((s) => s.slug !== "maintenance");
+  // Lead with the four we can evidence with case studies. The rest are on
+  // /services — a homepage grid of ten reads as "generalist", not "studio".
+  const featured = coreServices;
   return (
     <section id="services" className="container-x py-24 lg:py-32">
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -26,16 +27,14 @@ export function ServicesSection() {
         </Link>
       </div>
 
-      <div className="mt-14 grid gap-px overflow-hidden rounded-4xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-14 grid gap-px overflow-hidden rounded-4xl border border-border bg-border sm:grid-cols-2">
         {featured.map((service, i) => (
           <motion.div
             key={service.slug}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, delay: (i % 3) * 0.06 }}
-            // 9 cards: fill the odd cell on 2-col tablets; perfect 3×3 on desktop
-            className="sm:last:col-span-2 lg:last:col-span-1"
+            transition={{ duration: 0.5, delay: (i % 2) * 0.06 }}
           >
             <Link
               href={`/services/${service.slug}`}

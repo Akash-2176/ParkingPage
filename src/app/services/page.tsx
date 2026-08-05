@@ -1,30 +1,33 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/site";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageHeader } from "@/components/ui/page-header";
-import { services } from "@/data/services";
+import { coreServices, supportingServices } from "@/data/services";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { ProcessSection } from "@/components/home/process-section";
 import { CtaSection } from "@/components/home/cta-section";
 import { Reveal } from "@/components/interactive/reveal";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Services",
   description:
-    "From websites and web apps to mobile, brand, ecommerce, SaaS, cloud and AI — the full range of Ezura Arc's creative technology services.",
-};
+    "Web applications, websites, AI products and mobile apps — built end to end by Ezura Arc, with brand, ecommerce, cloud and support around them.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
     <>
       <PageHeader
         eyebrow="Capabilities"
-        title="Everything you need, under one roof"
-        description="Ten disciplines, one team. We combine them fluidly so your product is designed, built and grown without the seams."
+        title="Four things we do properly"
+        description="We lead with the work we can show you — web applications, websites, AI products and mobile. Everything else below supports those builds rather than competing with them."
       />
 
       <section className="container-x py-16 lg:py-24">
         <div className="flex flex-col gap-4">
-          {services.map((service, i) => (
+          {coreServices.map((service, i) => (
             <Reveal key={service.slug} delay={(i % 3) * 0.05}>
               <Link
                 href={`/services/${service.slug}`}
@@ -50,6 +53,39 @@ export default function ServicesPage() {
               </Link>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* Supporting capabilities — deliberately quieter than the four above. */}
+      <section className="border-t border-border bg-subtle py-16 lg:py-24">
+        <div className="container-x">
+          <SectionHeading
+            eyebrow="Also available"
+            title="Supporting capabilities"
+            description="Usually part of a larger build rather than a standalone engagement — but we're happy to take any of them on their own."
+          />
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {supportingServices.map((service) => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className="group flex items-center gap-4 rounded-3xl border border-border bg-card p-5 transition-colors hover:border-brand/40"
+              >
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand transition-colors group-hover:bg-brand group-hover:text-white">
+                  <service.icon className="h-5 w-5" />
+                </span>
+                <span className="flex-1">
+                  <span className="block font-medium text-foreground">
+                    {service.title}
+                  </span>
+                  <span className="block text-sm text-muted-foreground">
+                    {service.short}
+                  </span>
+                </span>
+                <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-brand" />
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

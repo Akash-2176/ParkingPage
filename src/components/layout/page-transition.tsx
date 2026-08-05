@@ -25,11 +25,16 @@ export function PageTransition({ children }: { children: ReactNode }) {
   }, [pathname, lenis]);
 
   return (
+    // 180ms, opacity only. This fade gates everything below it — the page
+    // header's own reveal can't start until it finishes — so every extra
+    // millisecond here is added to the time before the user sees the new <h1>.
+    // The y-slide is gone for the same reason: it delayed the headline twice
+    // (once here, once in TextReveal) for a movement nobody consciously sees.
     <motion.main
       key={pathname}
-      initial={firstLoad.current ? false : { opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      initial={firstLoad.current ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.18, ease: "easeOut" }}
     >
       {children}
     </motion.main>

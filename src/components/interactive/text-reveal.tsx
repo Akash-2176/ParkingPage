@@ -14,7 +14,9 @@ const wordContainer: Variants = {
 
 const wordVariant: Variants = {
   hidden: { y: "110%" },
-  show: { y: 0, transition: { duration: 0.9, ease } },
+  // 0.9s per word plus stagger meant a 5-word headline wasn't fully settled
+  // for well over a second after a route change.
+  show: { y: 0, transition: { duration: 0.55, ease } },
 };
 
 /**
@@ -27,12 +29,15 @@ export function TextReveal({
   as: Tag = "h1",
   stagger = 0.06,
   delay = 0,
+  immediate = false,
 }: {
   text: string;
   className?: string;
   as?: keyof JSX.IntrinsicElements;
   stagger?: number;
   delay?: number;
+  /** Play on mount — see Reveal's `immediate`. Set this on page headlines. */
+  immediate?: boolean;
 }) {
   const words = text.split(" ");
   const MotionTag = motion.create(Tag as any);
@@ -42,8 +47,9 @@ export function TextReveal({
       variants={wordContainer}
       custom={stagger}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true }}
+      {...(immediate
+        ? { animate: "show" }
+        : { whileInView: "show", viewport: { once: true } })}
       transition={{ delayChildren: delay }}
     >
       {words.map((word, i) => (

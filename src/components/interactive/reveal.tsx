@@ -11,20 +11,30 @@ export function Reveal({
   y = 26,
   className,
   once = true,
+  immediate = false,
 }: {
   children: ReactNode;
   delay?: number;
   y?: number;
   className?: string;
   once?: boolean;
+  /**
+   * Play on mount instead of waiting for an intersection callback. Use for
+   * anything above the fold: `whileInView` costs an observer round-trip before
+   * the animation even starts, which reads as navigation lag on content that
+   * was already on screen.
+   */
+  immediate?: boolean;
 }) {
+  const anim = { opacity: 1, y: 0 };
   return (
     <motion.div
       className={className}
       initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: "-80px" }}
-      transition={{ duration: 0.8, ease, delay }}
+      {...(immediate
+        ? { animate: anim }
+        : { whileInView: anim, viewport: { once, margin: "-80px" } })}
+      transition={{ duration: immediate ? 0.45 : 0.8, ease, delay }}
     >
       {children}
     </motion.div>

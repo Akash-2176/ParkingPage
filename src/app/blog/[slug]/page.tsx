@@ -7,7 +7,7 @@ import Image from "next/image";
 import { CtaSection } from "@/components/home/cta-section";
 import { Reveal } from "@/components/interactive/reveal";
 import { formatDate } from "@/lib/format";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, absoluteUrl } from "@/lib/site";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -21,14 +21,33 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
+  const url = absoluteUrl(`/blog/${post.slug}`);
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical: url },
     openGraph: {
       type: "article",
+      url,
+      siteName: siteConfig.name,
       title: post.title,
       description: post.excerpt,
       publishedTime: post.date,
+      authors: [post.author.name],
+      images: [
+        {
+          url: siteConfig.ogImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [siteConfig.ogImage],
     },
   };
 }

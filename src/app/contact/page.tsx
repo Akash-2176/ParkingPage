@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { Mail, MapPin, Phone, Clock, MessageCircle } from "lucide-react";
 import { PageHeader } from "@/components/ui/page-header";
 import { ContactForm } from "@/components/forms/contact-form";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Contact",
   description:
     "Start a project with Ezura Arc. Tell us what you're building — we reply within one business day.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   const details = [

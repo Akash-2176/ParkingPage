@@ -11,7 +11,7 @@ import { Reveal } from "@/components/interactive/reveal";
 import { ProjectCard } from "@/components/ui/project-card";
 import { FloatingOrbs } from "@/components/interactive/floating-orbs";
 import { Eyebrow } from "@/components/ui/badge";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, pageMeta } from "@/lib/site";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -25,11 +25,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
-  return {
+  return pageMeta({
     title: `${project.title} — Case Study`,
     description: project.summary,
-    openGraph: { title: `${project.title} — ${siteConfig.name}`, description: project.summary },
-  };
+    path: `/portfolio/${project.slug}`,
+  });
 }
 
 export default async function ProjectDetail({
@@ -57,11 +57,6 @@ export default async function ProjectDetail({
           <div className="mt-8 flex flex-col gap-6">
             <div className="flex flex-wrap items-center gap-3">
               <Eyebrow>{project.category}</Eyebrow>
-              {project.confidential && (
-                <span className="rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-medium text-muted-foreground">
-                  Confidential · under NDA
-                </span>
-              )}
             </div>
             <h1 className="display-hero">{project.title}</h1>
             <p className="max-w-2xl text-lg text-muted-foreground md:text-xl">

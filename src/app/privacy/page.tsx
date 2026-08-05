@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal/legal-layout";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Privacy Policy",
-  description: "How Ezura Arc collects, uses and protects your personal information.",
-};
+  description:
+    "How Ezura Arc collects, uses and protects your personal information.",
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

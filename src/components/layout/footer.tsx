@@ -154,6 +154,9 @@ export function Footer() {
         <div className="container-x flex flex-col items-center justify-between gap-4 py-6 text-sm text-muted-foreground md:flex-row">
           <p>
             © {new Date().getFullYear()} {siteConfig.legalName}. All rights reserved.
+            <span className="mt-1 block text-xs text-muted-foreground/80">
+              CIN: {siteConfig.cin}
+            </span>
           </p>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="hover:text-brand">

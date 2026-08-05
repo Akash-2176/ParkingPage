@@ -1,8 +1,15 @@
-export const stats = [
-  { value: 3, suffix: "", label: "Flagship projects delivered" },
-  { value: 100, suffix: "%", label: "Client satisfaction" },
-  { value: 24, prefix: "<", suffix: "h", label: "Reply to enquiries" },
-  { value: 10, suffix: "", label: "Disciplines, in-house" },
+/**
+ * Facts a buyer can check, not scores we award ourselves. Nothing here
+ * animates — see components/home/stats.tsx for why.
+ *
+ * Rule for editing: if you can't evidence it on request, it doesn't go here.
+ * "100% client satisfaction" from a three-project studio reads as filler.
+ */
+export const credentials = [
+  { value: "Pvt Ltd", label: "Registered in Tamil Nadu, 2026" },
+  { value: "30+ stations", label: "Police portal live across Namakkal district" },
+  { value: "Karur", label: "Based here, working across India" },
+  { value: "< 1 day", label: "Reply to every enquiry" },
 ];
 
 export const process = [
@@ -91,28 +98,34 @@ export const industries = [
   { name: "Enterprise", body: "Internal tools your teams don't dread opening." },
 ];
 
+/**
+ * The founder is a person. The Hubs are how the studio's work is organised —
+ * named as practices, not as colleagues, so nobody reads them as headcount we
+ * don't have. Add real people here as they join.
+ */
 export const team = [
   {
     name: "Akash M G",
     role: "Founder & Creative Technologist",
-    bio: "Bridges design and engineering — sets the studio's craft bar and leads every flagship build.",
+    bio: "Bridges design and engineering — sets the studio's craft bar and leads every build end to end.",
     initials: "AM",
+    image: true,
   },
   {
     name: "DesignHub",
-    role: "Product & Brand Design",
-    bio: "Research-led designers crafting interfaces and identities that feel inevitable.",
+    role: "Practice · Product & Brand Design",
+    bio: "Where research turns into interfaces and identities — the design half of every engagement.",
     initials: "DH",
   },
   {
     name: "DevHub",
-    role: "Full-stack & Mobile Engineering",
-    bio: "Type-safe, tested, performance-obsessed builders shipping production software.",
+    role: "Practice · Full-stack & Mobile",
+    bio: "Type-safe, tested, performance-obsessed delivery — the engineering half of every engagement.",
     initials: "DV",
   },
   {
     name: "ResearchHub",
-    role: "R&D, AI & Strategy",
+    role: "Practice · R&D, AI & Strategy",
     bio: "Where raw problems get taken apart — research, prototypes and AI experiments that become tomorrow's solutions.",
     initials: "RH",
   },

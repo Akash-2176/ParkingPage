@@ -2,6 +2,7 @@ import { LogoMark } from "@/components/logo";
 import { Reveal } from "@/components/interactive/reveal";
 import { TextReveal } from "@/components/interactive/text-reveal";
 import { siteConfig } from "@/lib/site";
+import { FounderAvatar } from "@/components/ui/founder-avatar";
 
 export function FounderNote() {
   return (
@@ -36,9 +37,7 @@ export function FounderNote() {
           </div>
           <Reveal delay={0.2}>
             <div className="flex items-center gap-4 pt-2">
-              <span className="grid h-12 w-12 place-items-center rounded-full bg-brand-gradient font-display text-sm font-semibold text-white">
-                AM
-              </span>
+              <FounderAvatar />
               <div>
                 <p className="font-medium text-foreground">{siteConfig.founder}</p>
                 <p className="text-sm text-muted-foreground">Founder, {siteConfig.name}</p>

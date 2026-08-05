@@ -5,13 +5,15 @@ import { StatsSection } from "@/components/home/stats";
 import { CtaSection } from "@/components/home/cta-section";
 import { Reveal, Stagger, StaggerItem } from "@/components/interactive/reveal";
 import { team, industries } from "@/data/general";
-import { siteConfig } from "@/lib/site";
+import { FounderAvatar } from "@/components/ui/founder-avatar";
+import { siteConfig, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Studio",
   description:
     "Ezura Arc is a creative technology studio blending design, engineering, brand and AI. Meet the people crafting dreams into reality.",
-};
+  path: "/about",
+});
 
 const values = [
   { title: "Craft over volume", body: "We take fewer projects and pour more into each. Quality is a choice we make daily." },
@@ -113,11 +115,9 @@ export default function AboutPage() {
                   From here, the only way is up.
                 </p>
                 <div className="flex items-center gap-4">
-                  <span className="grid h-12 w-12 place-items-center rounded-full bg-brand-gradient font-display text-sm font-semibold text-white">
-                    AM
-                  </span>
+                  <FounderAvatar size={56} className="border-white/20" />
                   <div>
-                    <p className="font-medium text-white">Akash M G</p>
+                    <p className="font-medium text-white">{siteConfig.founder}</p>
                     <p className="text-sm text-white/50">Founder</p>
                   </div>
                 </div>
@@ -162,9 +162,13 @@ export default function AboutPage() {
           {team.map((m) => (
             <StaggerItem key={m.name}>
               <div className="group flex h-full flex-col gap-4 rounded-4xl border border-border bg-card p-7 transition-colors hover:border-brand/40">
-                <div className="grid h-20 w-20 place-items-center rounded-3xl bg-brand-gradient font-display text-2xl font-semibold text-white">
-                  {m.initials}
-                </div>
+                {m.image ? (
+                  <FounderAvatar size={80} rounded="rounded-3xl" />
+                ) : (
+                  <div className="grid h-20 w-20 place-items-center rounded-3xl bg-brand-gradient font-display text-2xl font-semibold text-white">
+                    {m.initials}
+                  </div>
+                )}
                 <div>
                   <h3 className="font-display text-lg font-semibold text-foreground">
                     {m.name}

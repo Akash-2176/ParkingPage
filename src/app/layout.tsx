@@ -42,14 +42,25 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} — Creative Technology Studio`,
     description: siteConfig.description,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} — ${siteConfig.tagline}`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} — Creative Technology Studio`,
     description: siteConfig.description,
-    creator: "@ezuraarc",
+    creator: "@Ezura_Arc",
+    images: [siteConfig.ogImage],
   },
-  alternates: { canonical: siteConfig.url },
+  // Canonical is set PER ROUTE via `pageMeta()` in @/lib/site.
+  // Declaring it here made every interior page canonicalise to the homepage.
+  alternates: { canonical: "/" },
   robots: {
     index: true,
     follow: true,
@@ -79,7 +90,18 @@ const orgJsonLd = {
   email: siteConfig.email,
   telephone: siteConfig.phone,
   slogan: siteConfig.tagline,
-  founder: { "@type": "Person", name: siteConfig.founder },
+  foundingDate: siteConfig.incorporated,
+  identifier: {
+    "@type": "PropertyValue",
+    propertyID: "CIN",
+    value: siteConfig.cin,
+  },
+  founder: {
+    "@type": "Person",
+    name: siteConfig.founder,
+    jobTitle: siteConfig.founderRole,
+    image: `${siteConfig.url}${siteConfig.founderImage}`,
+  },
   address: {
     "@type": "PostalAddress",
     streetAddress: `${siteConfig.address.line1}, ${siteConfig.address.line2}`,

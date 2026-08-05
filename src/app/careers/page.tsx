@@ -4,12 +4,14 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { CareerForm } from "@/components/forms/career-form";
 import { Reveal } from "@/components/interactive/reveal";
 import { MapPin, Clock } from "lucide-react";
+import { pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Careers",
   description:
     "Join Ezura Arc — a small, senior creative technology studio where craft is the point. Open roles in design, engineering and AI.",
-};
+  path: "/careers",
+});
 
 // Flip to true when hiring reopens — the roles below and the application form
 // come back to life without any other changes.

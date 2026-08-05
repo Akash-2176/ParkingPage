@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/site";
 import { PageHeader } from "@/components/ui/page-header";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { TechTimeline } from "@/components/tech/tech-timeline";
 import { CtaSection } from "@/components/home/cta-section";
 import { techStack } from "@/data/general";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Technologies",
   description:
     "The modern stack Ezura Arc uses to design, build, ship and scale — from Next.js and TypeScript to AI and cloud.",
-};
+  path: "/technologies",
+});
 
 export default function TechnologiesPage() {
   const grouped = techStack.reduce<Record<string, string[]>>((acc, t) => {

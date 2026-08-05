@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/site";
 import { PageHeader } from "@/components/ui/page-header";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CtaSection } from "@/components/home/cta-section";
 import { Stagger, StaggerItem } from "@/components/interactive/reveal";
 import { industries } from "@/data/general";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Industries",
   description:
     "Ezura Arc partners across fintech, healthtech, ecommerce, SaaS, real estate, education, hospitality and enterprise.",
-};
+  path: "/industries",
+});
 
 export default function IndustriesPage() {
   return (

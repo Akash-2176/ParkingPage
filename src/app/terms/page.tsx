@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal/legal-layout";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Terms of Service",
-  description: "The terms that govern your use of the Ezura Arc website and services.",
-};
+  description:
+    "The terms that govern your use of the Ezura Arc website and services.",
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

@@ -4,7 +4,6 @@ export type Project = {
   client: string;
   category: string;
   year: string;
-  confidential?: boolean;
   services: string[];
   summary: string;
   cover: { from: string; to: string }; // gradient stops
@@ -22,58 +21,53 @@ export type Project = {
 };
 
 /**
- * Our early engagements are under NDA, so they're presented here as
- * confidential case studies — code-named, with client identities withheld.
- * Replace the metrics / details with your real figures where you're able to,
- * or keep them confidential.
+ * Real engagements, named. `client` is the actual client — if a future project
+ * genuinely can't be named, write the sector ("A Karur-based CA firm") rather
+ * than reintroducing an NDA badge next to a public client name.
  */
 export const projects: Project[] = [
-
-
   {
     slug: "vc-police-portal",
     title: "VC Police Portal",
-    client: "Under NDA",
-    category: "GOVERNMENT · WEB & MOBILE PLATFORM",
-    year: " Sep 2024",
-    confidential: true,
+    client: "Namakkal District Police",
+    category: "Government · Web & Mobile Platform",
+    year: "Sep 2024",
     services: ["Public Safety", "Web App", "Mobile App"],
     summary:
-      "A centralized platform for managing Vinayagar idol registrations, immersion routes, and festival operations.",
+      "The Vinayakar Chaturthi police portal for Namakkal district — 750+ idol registrations, live immersion tracking and festival operations in one platform.",
     cover: { from: "#FF5A2E", to: "#434A5C" },
     coverImage: "/portfolio/vc-police-portal/vc-police-portal-overview.png",
     coverBg: "#F8F8F9",
     overview:
-      "The VC Police Portal was developed to digitize the planning and monitoring of Vinayagar idol installation and immersion activities. By providing a unified platform for registration management, route monitoring, and operational oversight, the system helps police authorities coordinate efficiently and maintain public safety during large-scale festivals.",
+      "Built for Namakkal District Police under the direct guidance of the Superintendent of Police, and deployed for Vinayakar Chaturthi in September 2024. The portal digitised the planning and monitoring of idol installation and immersion across the district — registration, route oversight and field coordination in a single platform, used live during the festival.",
     problem:
-      "Managing thousands of idol registrations and immersion events through manual processes made it difficult for police departments to maintain accurate records, monitor sensitive locations, and coordinate field officers. Limited visibility across jurisdictions increased administrative effort and delayed operational decision-making during high-traffic festival periods.",
+      "Idol registrations and immersion events were tracked on paper across dozens of stations. Records were hard to consolidate, sensitive locations were difficult to monitor centrally, and the SP's office had no live view of what was happening on the ground during the highest-risk hours of the festival.",
     solution:
-      "We built an integrated web and mobile platform that centralizes idol registration, applicant verification, route tracking, and operational monitoring. With role-based access, interactive dashboards, map visualization, and real-time data filtering, the portal enables police officials to oversee festival activities efficiently while improving coordination across departments.",
+      "We built an integrated web and mobile platform covering idol registration, applicant verification, route tracking and operational monitoring. Role-based access gives station writers, inspectors and the SP's office each the right view; map visualisation and live filtering give command staff a district-wide picture in real time. 150+ police writers were trained ahead of deployment across 30+ stations.",
     tech: ["React.js", "React Native", "Express.js", "MongoDB","AWS"],
     metrics: [
-      { value: "Centralized", label: "One platform for all festival monitoring" },
-      { value: "Real-time", label: "Live updates across all devices" },
-      { value: "Coordinated", label: "Connected operations across police departments" },
-      { value: "Safer", label: "Improved planning for public safety" },
+      { value: "750+", label: "Idols registered through the portal" },
+      { value: "150+", label: "Police writers trained on the system" },
+      { value: "30+", label: "Stations live across Namakkal district" },
+      { value: "25+", label: "Immersions live-tracked in pilot testing" },
     ],
     gallery: [
-      { from: "#FF5A2E", to: "#434A5C", label: "Dashboard", image : "/portfolio/vc-police-portal/sp-dashboard.png" },
-      { from: "#2E3340", to: "#0E0F14", label: "Sp-Registration and View", image : "/portfolio/vc-police-portal/sp-view.png" },
-      { from: "#FF7A4E", to: "#C42F09", label: "SP-Map View", image : "/portfolio/vc-police-portal/map-page.png" },
+      { from: "#FF5A2E", to: "#434A5C", label: "SP dashboard", image: "/portfolio/vc-police-portal/sp-dashboard.png" },
+      { from: "#2E3340", to: "#0E0F14", label: "Registration & review", image: "/portfolio/vc-police-portal/sp-view.png" },
+      { from: "#FF7A4E", to: "#C42F09", label: "Live immersion map", image: "/portfolio/vc-police-portal/map-page.png" },
     ],
     beforeAfter: {
-      before: "Manual registration processes, fragmented records, and limited operational visibility made it difficult to coordinate festival security and monitor idol immersion activities effectively.",
-      after: "A centralized platform that provides real-time visibility into registrations, immersion routes, and field operations, enabling faster coordination and more informed decision-making across police departments.",
+      before: "Paper registers at each station, no consolidated district view, and no way for command staff to see immersion movements as they happened.",
+      after: "750+ registrations in one system, 30+ stations live, and immersion routes tracked on a map the SP's office could watch during the festival.",
     },
   },
 
   {
     slug: "tmca",
-    title: "TMCA",
-    client: "Under NDA",
-    category: "Fintech · Web App",
+    title: "The Madras CA",
+    client: "The Madras CA",
+    category: "Fintech · Compliance Platform",
     year: "2026",
-    confidential: true,
     services: ["Product Design", "Web App", "Design System"],
     summary:
       "A secure client onboarding and compliance platform built for Chartered Accountants—streamlining document collection, automating financial workflows, and bringing every stage of the filing lifecycle into a single, centralized workspace.",
@@ -81,21 +75,23 @@ export const projects: Project[] = [
     coverImage: "/portfolio/TMCA/tmca-overview.png",
     coverBg: "#F6F0E7",
     overview:
-      "A CA firm needed a single workspace to replace scattered client emails, manual follow-ups, and disconnected compliance tools. We redesigned the entire workflow from document collection and verification to financial analysis and filing, creating an end-to-end system that reduced back-and-forth and brought every critical step into one secure interface.",
+      "The Madras CA needed a single workspace to replace scattered client emails, manual follow-ups, and disconnected compliance tools. We redesigned the entire workflow from document collection and verification to financial analysis and filing, creating an end-to-end system that reduced back-and-forth and brought every critical step into one secure interface.",
     problem:
-      "Before TMCA, client data lived across emails, WhatsApp threads, and scattered cloud folders. Compliance tasks were manual, repetitive, and hard to track, making it difficult for Chartered Accountants to maintain accuracy, ensure security, and deliver timely services to clients.",
+      "Before TMCA, their client data lived across emails, WhatsApp threads, and scattered cloud folders. Compliance tasks were manual, repetitive, and hard to track, making it difficult for Chartered Accountants to maintain accuracy, ensure security, and deliver timely services to clients.",
     solution:
       "We rebuilt the entire workflow from the ground up—starting with a secure client onboarding portal for document submission, followed by a centralized compliance hub where every verification step, financial calculation, and filing task lived in one place. The result is a seamless, end-to-end workspace that eliminates scattered data, reduces manual work, and ensures accuracy and compliance at every stage of the client lifecycle.",
     tech: ["Next.js", "TypeScript", "NestJS", "Python", "Supabase", "Prisma ORM", "AWS", "Amazon S3", "Amazon SQS"],
+    // TODO(akash): these describe the build qualitatively — swap in real figures
+    // (hours saved per filing, clients onboarded) once the firm shares them.
     metrics: [
-      { value: "1 team", label: "Founder-led delivery" },
-      { value: "6 wks", label: "Concept to live MVP" },
-      { value: "95+", label: "Lighthouse score" },
-      { value: "0", label: "Design-to-dev handoffs lost" },
+      { value: "End-to-end", label: "Onboarding to final filing in one place" },
+      { value: "Centralized", label: "Documents out of email and WhatsApp" },
+      { value: "Automated", label: "Verification and financial workflows" },
+      { value: "Secure", label: "Role-based access to client records" },
     ],
     gallery: [
-      { from: "#FF7A4E", to: "#ED3F0F", label: "Dashboard overview", image: "/portfolio/TMCA/tmca-dashboard.png" },
-      { from: "#434A5C", to: "#1B1E27", label: "Insights, simplified", image: "/portfolio/TMCA/team-overview.png" },
+      { from: "#FF7A4E", to: "#ED3F0F", label: "Compliance dashboard", image: "/portfolio/TMCA/tmca-dashboard.png" },
+      { from: "#434A5C", to: "#1B1E27", label: "Team & client overview", image: "/portfolio/TMCA/team-overview.png" },
       { from: "#FF9C77", to: "#FF5A2E", label: "Mobile companion", image: "/portfolio/TMCA/mobile-view.png" },
     ],
     beforeAfter: {
@@ -106,10 +102,9 @@ export const projects: Project[] = [
     {
     slug: "puppy-digital-mart",
     title: "Puppy Digital Mart",
-    client: "Under NDA",
-    category: "Ecommerce · Brand",
+    client: "Puppy Digital Mart",
+    category: "Ecommerce · Marketplace",
     year: "2025",
-    confidential: true,
     services: ["Marketplace", "E-Commerce", "Web App"],
     summary:
       "Connecting local businesses with customers through a unified digital marketplace for their products.",
@@ -122,7 +117,7 @@ export const projects: Project[] = [
       "Local retailers struggled to reach customers beyond their physical stores, and customers had limited access to discover and purchase gift cards from nearby businesses. The lack of a unified digital platform created friction for both merchants seeking growth and customers looking for convenient gifting options.",
     solution:
       "We enabled local retailers to showcase their gift cards on a unified marketplace, creating a seamless online platform for customers to discover and purchase vouchers. The system streamlined gift card management and accessibility, empowering businesses to expand their reach and customers to easily support local merchants through digital gifting.",
-    tech: ["Next.js", "Shopify (headless)", "TailwindCSS", "GSAP", "Razorpay"],
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "AWS"],
     metrics: [
       { value: "Connected", label: "Bringing local businesses and customers together" },
       { value: "Digital", label: "Digital gifting made simple" },
@@ -130,9 +125,9 @@ export const projects: Project[] = [
       { value: "Expanded", label: "Expanded reach for local retailers" },
     ],
     gallery: [
-      { from: "#434A5C", to: "#1B1E27", label: "Redemption Requests", image : "/portfolio/puppy-digital-mart/redemption-requests.png" },
-      { from: "#8A90A0", to: "#434A5C", label: "Product story", image : "/portfolio/puppy-digital-mart/user-management.png" },
-      { from: "#FF5A2E", to: "#8F2409", label: "Two-tap checkout", image : "/portfolio/puppy-digital-mart/home.png" },
+      { from: "#434A5C", to: "#1B1E27", label: "Redemption requests", image: "/portfolio/puppy-digital-mart/redemption-requests.png" },
+      { from: "#8A90A0", to: "#434A5C", label: "User management", image: "/portfolio/puppy-digital-mart/user-management.png" },
+      { from: "#FF5A2E", to: "#8F2409", label: "Marketplace home", image: "/portfolio/puppy-digital-mart/home.png" },
     ],
     beforeAfter: {
       before: "Local vendors relied on fragmented sales channels with limited digital visibility, making it difficult to promote and sell gift cards effectively.",

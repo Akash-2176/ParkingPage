@@ -360,3 +360,24 @@ export const services: Service[] = [
 ];
 
 export const getService = (slug: string) => services.find((s) => s.slug === slug);
+
+/**
+ * What we lead with. Ten equally-weighted services read as "generalist who'll
+ * subcontract" — these four are the ones the case studies actually evidence,
+ * so they get the headline treatment. The rest stay fully available (and keep
+ * their own indexed pages) as supporting capabilities.
+ */
+export const coreServiceSlugs = [
+  "web-applications",
+  "website-development",
+  "ai-solutions",
+  "mobile-apps",
+] as const;
+
+export const coreServices = coreServiceSlugs
+  .map((slug) => services.find((s) => s.slug === slug))
+  .filter((s): s is Service => Boolean(s));
+
+export const supportingServices = services.filter(
+  (s) => !coreServiceSlugs.includes(s.slug as (typeof coreServiceSlugs)[number]),
+);

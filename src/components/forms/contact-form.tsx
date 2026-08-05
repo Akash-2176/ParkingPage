@@ -10,7 +10,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site";
 
-const budgets = ["< ₹1L", "₹1L – ₹5L", "₹5L – ₹15L", "₹15L +"];
+// Budget deliberately isn't asked here. Making a cautious first-time enquirer
+// self-select a spend band before they've spoken to anyone loses the enquiry —
+// that conversation belongs on the discovery call.
 const serviceOptions = [
   "Website",
   "Web App",
@@ -26,8 +28,13 @@ const serviceOptions = [
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
   email: z.string().email("Enter a valid email"),
+  // Most enquiries here arrive by phone or WhatsApp, so this is required
+  // while company — which we can look up ourselves — is not.
+  phone: z
+    .string()
+    .min(10, "Enter a phone number we can reach you on")
+    .regex(/^[\d\s+()-]+$/, "Digits, spaces and + ( ) - only"),
   company: z.string().optional(),
-  budget: z.string().min(1, "Pick a budget range"),
   services: z.array(z.string()).min(1, "Select at least one service"),
   message: z.string().min(10, "Tell us a little more (10+ characters)"),
 });
@@ -47,11 +54,10 @@ export function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { services: [], budget: "" },
+    defaultValues: { services: [] },
   });
 
   const selectedServices = watch("services");
-  const selectedBudget = watch("budget");
 
   const toggleService = (s: string) => {
     const next = selectedServices.includes(s)
@@ -75,9 +81,9 @@ export function ContactForm() {
           from_name: "Ezura Arc Website",
           name: data.name,
           email: data.email,
+          phone: data.phone,
           company: data.company || "—",
           services: data.services.join(", "),
-          budget: data.budget,
           message: data.message,
           // Web3Forms attachments need a paid plan — we pass the filename so
           // you know a brief exists and can request it by reply.
@@ -135,13 +141,25 @@ export function ContactForm() {
         </Field>
       </div>
 
-      <Field label="Company (optional)">
-        <input
-          {...register("company")}
-          placeholder="Company name"
-          className={inputCls}
-        />
-      </Field>
+      <div className="grid gap-6 sm:grid-cols-2">
+        <Field label="Phone / WhatsApp" error={errors.phone?.message}>
+          <input
+            {...register("phone")}
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            placeholder="+91 98765 43210"
+            className={inputCls}
+          />
+        </Field>
+        <Field label="Company (optional)">
+          <input
+            {...register("company")}
+            placeholder="Company name"
+            className={inputCls}
+          />
+        </Field>
+      </div>
 
       <Field label="What do you need?" error={errors.services?.message}>
         <div className="flex flex-wrap gap-2">
@@ -158,26 +176,6 @@ export function ContactForm() {
               )}
             >
               {s}
-            </button>
-          ))}
-        </div>
-      </Field>
-
-      <Field label="Budget" error={errors.budget?.message}>
-        <div className="flex flex-wrap gap-2">
-          {budgets.map((b) => (
-            <button
-              key={b}
-              type="button"
-              onClick={() => setValue("budget", b, { shouldValidate: true })}
-              className={cn(
-                "rounded-full border px-4 py-2 text-sm transition-all",
-                selectedBudget === b
-                  ? "border-brand bg-brand text-white"
-                  : "border-border text-muted-foreground hover:border-brand/50",
-              )}
-            >
-              {b}
             </button>
           ))}
         </div>

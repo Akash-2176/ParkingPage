@@ -18,7 +18,9 @@ export function PageHeader({
     <section className="relative overflow-hidden pt-40 pb-16 lg:pt-52 lg:pb-24">
       <FloatingOrbs />
       <div className="container-x relative">
-        <Reveal>
+        {/* This header is always above the fold on a fresh navigation, so it
+            animates on mount rather than waiting to be scrolled into view. */}
+        <Reveal immediate>
           <Eyebrow>{eyebrow}</Eyebrow>
         </Reveal>
         {/* Full container width (no max-w) so long single words like
@@ -28,9 +30,10 @@ export function PageHeader({
           as="h1"
           text={title}
           className="mt-6 display-hero"
+          immediate
         />
         {description && (
-          <Reveal delay={0.15}>
+          <Reveal immediate delay={0.08}>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
               {description}
             </p>

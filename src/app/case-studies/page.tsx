@@ -7,12 +7,14 @@ import { CtaSection } from "@/components/home/cta-section";
 import { GradientCover } from "@/components/ui/gradient-cover";
 import { Reveal } from "@/components/interactive/reveal";
 import { projects } from "@/data/portfolio";
+import { pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Case Studies",
   description:
     "In-depth case studies from Ezura Arc — the problem, the solution and the measurable results behind our work.",
-};
+  path: "/case-studies",
+});
 
 export default function CaseStudiesPage() {
   return (

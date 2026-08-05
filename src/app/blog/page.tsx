@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/site";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageHeader } from "@/components/ui/page-header";
@@ -8,11 +9,12 @@ import { CtaSection } from "@/components/home/cta-section";
 import { Reveal } from "@/components/interactive/reveal";
 import { formatDate } from "@/lib/format";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Journal",
   description:
     "Notes from the Ezura Arc studio on design, engineering, AI and building better digital products.",
-};
+  path: "/blog",
+});
 
 export default function BlogPage() {
   const [featured, ...rest] = posts;

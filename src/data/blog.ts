@@ -17,7 +17,7 @@ export const posts: Post[] = [
     excerpt:
       "The most beautiful interface is worthless if it confuses. Here's how we keep aesthetics and usability on the same team.",
     category: "Design",
-    date: "2025-06-18",
+    date: "2026-07-22",
     readingTime: "5 min read",
     author: { name: "Akash M G", role: "Founder" },
     image: "/blog/design-is-how-it-works.svg",
@@ -38,7 +38,7 @@ export const posts: Post[] = [
     excerpt:
       "Most AI features fail not on capability but on credibility. Trust is a design problem — here's how we engineer it.",
     category: "AI",
-    date: "2025-05-27",
+    date: "2026-06-30",
     readingTime: "7 min read",
     author: { name: "Akash M G", role: "Founder" },
     image: "/blog/shipping-ai-people-trust.svg",
@@ -59,7 +59,7 @@ export const posts: Post[] = [
     excerpt:
       "Performance isn't something you sprinkle on at the end. It's a product decision that shapes everything before it.",
     category: "Engineering",
-    date: "2025-04-30",
+    date: "2026-05-19",
     readingTime: "6 min read",
     author: { name: "Akash M G", role: "Founder" },
     image: "/blog/speed-is-a-feature.svg",
@@ -79,7 +79,7 @@ export const posts: Post[] = [
     excerpt:
       "Jumping straight to design without positioning is like decorating a house with no foundation. Here's our order of operations.",
     category: "Brand",
-    date: "2025-03-15",
+    date: "2026-04-08",
     readingTime: "4 min read",
     author: { name: "Akash M G", role: "Founder" },
     image: "/blog/brand-before-build.svg",

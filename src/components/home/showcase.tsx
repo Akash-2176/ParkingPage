@@ -12,7 +12,7 @@ export function Showcase() {
         <SectionHeading
           eyebrow="Selected work"
           title="Early work we're proud of"
-          description="Our first engagements are under NDA, so they're shared here as confidential case studies — the thinking and the craft, with client identities kept private."
+          description="Three shipped platforms — district police operations, CA compliance and local commerce. The thinking, the craft and what changed for the people using them."
         />
         <div className="mt-14 grid gap-10 md:grid-cols-2">
           {featured.map((p, i) => (

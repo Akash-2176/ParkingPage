@@ -5,13 +5,21 @@ export const siteConfig = {
   description:
     "Ezura Arc is a creative technology studio crafting award-worthy websites, applications, brands and AI products — where design and engineering move as one.",
   url: "https://www.ezuraarc.com",
+  // A real file in /public — NOT a generated opengraph-image route. With
+  // `output: "export"` an ImageResponse route never gets written to /out, so
+  // every page shipped a summary_large_image card with no image behind it.
   ogImage: "/og.png",
   founder: "Akash M G",
+  founderRole: "Founder & Creative Technologist",
+  founderImage: "/founder.png",
+  // Corporate Identification Number — Registrar of Companies, Chennai.
+  cin: "U62011TN2026PTC188074",
+  incorporated: "2026",
   email: "hello@ezuraarc.com",
   phone: "+91 9500264291",
   phoneHref: "+919500264291",
   whatsapp: "919500264291",
-  calendly: "http://calendly.com/hello-ezuraarc",
+  calendly: "https://calendly.com/hello-ezuraarc",
   //web3fromkey - public client key , safe to expose in client
   web3formsKey: "7a23a01d-9f31-402a-b351-80b093d94540",
   address: {
@@ -22,15 +30,67 @@ export const siteConfig = {
     zip: "639006",
     country: "India",
   },
+  // Real profiles only. An empty slot beats a link to a bare homepage —
+  // add a platform back here once the profile actually has work on it.
   socials: {
-    dribbble: "https://dribbble.com",
-    behance: "https://behance.net",
-    instagram: "https://instagram.com",
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    github: "https://github.com",
+    dribbble: "https://dribbble.com/ezuraarc",
+    behance: "https://www.behance.net/EzuraArc",
+    instagram: "https://www.instagram.com/ezuraarc/",
+    x: "https://x.com/Ezura_Arc",
+    github: "https://github.com/EzuraArc",
   },
 } as const;
+
+/**
+ * Absolute URL for a route. Next resolves relative canonicals against
+ * `metadataBase`, but sitemap/JSON-LD need the fully-qualified form.
+ */
+export const absoluteUrl = (path = "/") =>
+  `${siteConfig.url}${path === "/" ? "" : path}`;
+
+/**
+ * Per-route metadata. Every page MUST spread this — a missing `alternates`
+ * makes the route inherit the layout's canonical and de-indexes itself.
+ */
+export function pageMeta({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}) {
+  const url = absoluteUrl(path);
+  const ogTitle = `${title} — ${siteConfig.name}`;
+  const images = [
+    {
+      url: siteConfig.ogImage,
+      width: 1200,
+      height: 630,
+      alt: `${siteConfig.name} — ${siteConfig.tagline}`,
+    },
+  ];
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "website" as const,
+      url,
+      siteName: siteConfig.name,
+      title: ogTitle,
+      description,
+      images,
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: ogTitle,
+      description,
+      images,
+    },
+  };
+}
 
 export const navLinks = [
   { label: "Work", href: "/portfolio" },
