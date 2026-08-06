@@ -12,6 +12,7 @@ import { ProjectCard } from "@/components/ui/project-card";
 import { FloatingOrbs } from "@/components/interactive/floating-orbs";
 import { Eyebrow } from "@/components/ui/badge";
 import { siteConfig, pageMeta } from "@/lib/site";
+import { caseStudySchema } from "@/lib/schema";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -45,6 +46,12 @@ export default async function ProjectDetail({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(caseStudySchema(project)),
+        }}
+      />
       <section className="relative overflow-hidden pt-36 lg:pt-44">
         <FloatingOrbs />
         <div className="container-x relative">

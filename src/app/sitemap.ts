@@ -5,9 +5,17 @@ import { services } from "@/data/services";
 import { projects } from "@/data/portfolio";
 import { posts } from "@/data/blog";
 
+/**
+ * Content revision date. Previously this was `new Date()`, so every deploy
+ * claimed all 31 URLs had changed — crawlers that notice the pattern stop
+ * trusting `lastModified` for the domain entirely, which costs the ability to
+ * signal a real update later. Bump this by hand when content actually changes.
+ */
+const CONTENT_UPDATED = new Date("2026-08-06");
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
-  const now = new Date();
+  const now = CONTENT_UPDATED;
 
   const staticRoutes = [
     "",

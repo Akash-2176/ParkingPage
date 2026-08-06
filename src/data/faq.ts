@@ -6,8 +6,8 @@ export const faqs: FAQ[] = [
     a: "We're a creative technology studio — the overlap of design, engineering, brand and AI. We don't just build software; we craft digital experiences that compete on the world stage.",
   },
   {
-    q: "How do you price your work?",
-    a: "Every project is scoped individually around your goals — no bloated retainers, no one-size-fits-all packages. Tell us what you're building and we'll come back with a clear, tailored proposal that delivers the best value in the market for the level of craft you get.",
+    q: "How much does a project cost?",
+    a: "Projects start from ₹15,000, and scale from there with scope. A brochure site for a small business sits near the lower end; a custom web or mobile platform with dashboards, integrations and ongoing support costs more. Every project is quoted individually — no bloated retainers and no one-size-fits-all packages. Tell us what you're building and we'll come back with a clear, itemised proposal.",
   },
   {
     q: "How fast can you deliver?",

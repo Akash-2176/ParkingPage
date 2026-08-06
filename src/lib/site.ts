@@ -30,9 +30,38 @@ export const siteConfig = {
     zip: "639006",
     country: "India",
   },
+  /**
+   * Registered office coordinates (V.Pasupathipalayam, Karur 639006) — verified
+   * against the postcode in `address` above via reverse geocoding.
+   */
+  geo: { lat: 10.9943558, lng: 78.0895915 },
+  /**
+   * Working office at KSR College of Engineering, Tiruchengode, Namakkal
+   * district. Emitted as a secondary Place, separate from the registered
+   * address that the CIN is tied to.
+   */
+  office: {
+    name: "KSR College of Engineering",
+    locality: "Tiruchengode",
+    region: "Tamil Nadu",
+    district: "Namakkal",
+    zip: "637215",
+    geo: { lat: 11.3584886, lng: 77.8269074 },
+  },
+  /**
+   * Real starting figure, in INR. A concrete number is what makes the studio
+   * citable for "how much / affordable" queries — a price band alone can't be
+   * quoted back by an assistant. `priceRange` is the coarse schema.org form.
+   */
+  startingPrice: 15000,
+  priceRange: "₹₹",
   // Real profiles only. An empty slot beats a link to a bare homepage —
   // add a platform back here once the profile actually has work on it.
   socials: {
+    // LinkedIn first: it's the platform CAs, SMEs and government buyers
+    // actually check, and a heavily-weighted sameAs signal for entity
+    // resolution. Dribbble/Behance are designer-to-designer channels.
+    linkedin: "https://www.linkedin.com/company/ezuraarc",
     dribbble: "https://dribbble.com/ezuraarc",
     behance: "https://www.behance.net/EzuraArc",
     instagram: "https://www.instagram.com/ezuraarc/",

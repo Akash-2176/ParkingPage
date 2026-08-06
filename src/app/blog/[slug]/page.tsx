@@ -9,6 +9,7 @@ import { Reveal } from "@/components/interactive/reveal";
 import { formatDate } from "@/lib/format";
 import { siteConfig, absoluteUrl } from "@/lib/site";
 import { FounderAvatar } from "@/components/ui/founder-avatar";
+import { blogPostingSchema } from "@/lib/schema";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -62,6 +63,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(blogPostingSchema(post)),
+        }}
+      />
       <article className="pt-36 lg:pt-44">
         <div className="container-x">
           <Link

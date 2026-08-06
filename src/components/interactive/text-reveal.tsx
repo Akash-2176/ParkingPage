@@ -43,6 +43,11 @@ export function TextReveal({
   const MotionTag = motion.create(Tag as any);
   return (
     <MotionTag
+      // The headline is split into one span per word, so a text extractor that
+      // concatenates without adding whitespace at element boundaries reads
+      // "Everythingyoumightask". This gives accessibility-tree-based readers
+      // (screen readers and several AI pipelines) the correct unsplit string.
+      aria-label={text}
       className={cn("flex flex-wrap", className)}
       variants={wordContainer}
       custom={stagger}

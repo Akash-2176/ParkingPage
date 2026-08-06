@@ -10,6 +10,7 @@ import { CtaSection } from "@/components/home/cta-section";
 import { Reveal, Stagger, StaggerItem } from "@/components/interactive/reveal";
 import { Button } from "@/components/ui/button";
 import { siteConfig, pageMeta } from "@/lib/site";
+import { serviceSchema } from "@/lib/schema";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -43,6 +44,13 @@ export default async function ServiceDetail({
 
   return (
     <>
+      {/* Plain <script>, not next/script — see the note in @/lib/schema. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceSchema(service)),
+        }}
+      />
       <PageHeader eyebrow="Service" title={service.title} description={service.tagline}>
         <Reveal delay={0.2}>
           <p className="mt-6 max-w-3xl text-muted-foreground">{service.description}</p>

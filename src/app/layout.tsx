@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { fontDisplay, fontSans } from "./fonts";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
+import { siteGraph } from "@/lib/schema";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { CustomCursor } from "@/components/interactive/custom-cursor";
@@ -81,38 +81,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const orgJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: siteConfig.legalName,
-  alternateName: siteConfig.name,
-  url: siteConfig.url,
-  logo: `${siteConfig.url}/favicon.svg`,
-  email: siteConfig.email,
-  telephone: siteConfig.phone,
-  slogan: siteConfig.tagline,
-  foundingDate: siteConfig.incorporated,
-  identifier: {
-    "@type": "PropertyValue",
-    propertyID: "CIN",
-    value: siteConfig.cin,
-  },
-  founder: {
-    "@type": "Person",
-    name: siteConfig.founder,
-    jobTitle: siteConfig.founderRole,
-    image: `${siteConfig.url}${siteConfig.founderImage}`,
-  },
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: `${siteConfig.address.line1}, ${siteConfig.address.line2}`,
-    addressLocality: siteConfig.address.city,
-    addressRegion: siteConfig.address.state,
-    postalCode: siteConfig.address.zip,
-    addressCountry: "IN",
-  },
-  sameAs: Object.values(siteConfig.socials),
-};
+// The Organization/Person/WebSite graph now lives in @/lib/schema so the same
+// @id constants can be referenced from service, blog and case-study pages.
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -131,13 +101,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `window.__ezRevealFailsafe=setTimeout(function(){document.documentElement.classList.add('no-hydrate')},2500);`,
           }}
         />
+        {/*
+          MUST be a plain <script>, never next/script. next/script defaults to
+          strategy="afterInteractive", which injects the tag client-side — so it
+          never reaches the static HTML and no AI crawler (they don't run JS)
+          ever sees it. This shipped 0 of 32 pages with structured data.
+        */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraph) }}
+        />
       </head>
       <body>
-        <Script
-          id="org-jsonld"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
-        />
         {/* Analytics placeholder — drop your GA4 / Plausible snippet here. */}
         <ThemeProvider>
           <HydrationGate />
