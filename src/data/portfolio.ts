@@ -125,9 +125,9 @@ export const projects: Project[] = [
       { value: "Expanded", label: "Expanded reach for local retailers" },
     ],
     gallery: [
-      { from: "#434A5C", to: "#1B1E27", label: "Redemption requests", image: "/portfolio/puppy-digital-mart/redemption-requests.webp" },
-      { from: "#8A90A0", to: "#434A5C", label: "User management", image: "/portfolio/puppy-digital-mart/user-management.webp" },
-      { from: "#FF5A2E", to: "#8F2409", label: "Marketplace home", image: "/portfolio/puppy-digital-mart/home.webp" },
+      { from: "#434A5C", to: "#1B1E27", label: "Redemption requests", image: "/portfolio/puppy-digital-mart/redemption-requests.png" },
+      { from: "#8A90A0", to: "#434A5C", label: "User management", image: "/portfolio/puppy-digital-mart/user-management.png" },
+      { from: "#FF5A2E", to: "#8F2409", label: "Marketplace home", image: "/portfolio/puppy-digital-mart/home.png" },
     ],
     beforeAfter: {
       before: "Local vendors relied on fragmented sales channels with limited digital visibility, making it difficult to promote and sell gift cards effectively.",

@@ -159,7 +159,7 @@ export default async function ProjectDetail({
                     alt={g.label} 
                     width={600} 
                     height={800} 
-                    className="aspect-[3/4] w-full object-contain" 
+                    className="aspect-[3/4] w-full object-cover object-top" 
                   />
                   {g.label && (
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-5 pt-12">
