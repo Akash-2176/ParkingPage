@@ -8,6 +8,7 @@ import { CtaSection } from "@/components/home/cta-section";
 import { Reveal } from "@/components/interactive/reveal";
 import { formatDate } from "@/lib/format";
 import { siteConfig, absoluteUrl } from "@/lib/site";
+import { FounderAvatar } from "@/components/ui/founder-avatar";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -82,9 +83,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             <h1 className="mt-5 display-lg">{post.title}</h1>
             <p className="mt-5 text-xl text-muted-foreground">{post.excerpt}</p>
             <div className="mt-6 flex items-center gap-3">
-              <span className="grid h-11 w-11 place-items-center rounded-full bg-brand-gradient font-display text-sm font-semibold text-white">
-                {post.author.name.split(" ").map((n) => n[0]).join("")}
-              </span>
+              {post.author.name === siteConfig.founder ? (
+                <FounderAvatar size={44} />
+              ) : (
+                <span className="grid h-11 w-11 place-items-center rounded-full bg-brand-gradient font-display text-sm font-semibold text-white">
+                  {post.author.name.split(" ").map((n) => n[0]).join("")}
+                </span>
+              )}
               <div>
                 <p className="text-sm font-medium text-foreground">{post.author.name}</p>
                 <p className="text-xs text-muted-foreground">{post.author.role}</p>

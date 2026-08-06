@@ -11,7 +11,7 @@ export const siteConfig = {
   ogImage: "/og.png",
   founder: "Akash M G",
   founderRole: "Founder & Creative Technologist",
-  founderImage: "/founder.png",
+  founderImage: "/founder.webp",
   // Corporate Identification Number — Registrar of Companies, Chennai.
   cin: "U62011TN2026PTC188074",
   incorporated: "2026",

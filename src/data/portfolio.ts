@@ -36,7 +36,7 @@ export const projects: Project[] = [
     summary:
       "The Vinayakar Chaturthi police portal for Namakkal district — 750+ idol registrations, live immersion tracking and festival operations in one platform.",
     cover: { from: "#FF5A2E", to: "#434A5C" },
-    coverImage: "/portfolio/vc-police-portal/vc-police-portal-overview.png",
+    coverImage: "/portfolio/vc-police-portal/vc-police-portal-overview.webp",
     coverBg: "#F8F8F9",
     overview:
       "Built for Namakkal District Police under the direct guidance of the Superintendent of Police, and deployed for Vinayakar Chaturthi in September 2024. The portal digitised the planning and monitoring of idol installation and immersion across the district — registration, route oversight and field coordination in a single platform, used live during the festival.",
@@ -52,9 +52,9 @@ export const projects: Project[] = [
       { value: "25+", label: "Immersions live-tracked in pilot testing" },
     ],
     gallery: [
-      { from: "#FF5A2E", to: "#434A5C", label: "SP dashboard", image: "/portfolio/vc-police-portal/sp-dashboard.png" },
-      { from: "#2E3340", to: "#0E0F14", label: "Registration & review", image: "/portfolio/vc-police-portal/sp-view.png" },
-      { from: "#FF7A4E", to: "#C42F09", label: "Live immersion map", image: "/portfolio/vc-police-portal/map-page.png" },
+      { from: "#FF5A2E", to: "#434A5C", label: "SP dashboard", image: "/portfolio/vc-police-portal/sp-dashboard.webp" },
+      { from: "#2E3340", to: "#0E0F14", label: "Registration & review", image: "/portfolio/vc-police-portal/sp-view.webp" },
+      { from: "#FF7A4E", to: "#C42F09", label: "Live immersion map", image: "/portfolio/vc-police-portal/map-page.webp" },
     ],
     beforeAfter: {
       before: "Paper registers at each station, no consolidated district view, and no way for command staff to see immersion movements as they happened.",
@@ -109,7 +109,7 @@ export const projects: Project[] = [
     summary:
       "Connecting local businesses with customers through a unified digital marketplace for their products.",
     cover: { from: "#434A5C", to: "#1B1E27" },
-    coverImage: "/portfolio/puppy-digital-mart/puppy-digital-overview.png",
+    coverImage: "/portfolio/puppy-digital-mart/puppy-digital-overview.webp",
     coverBg: "#F4F8FD",
     overview:
       "Puppy Digital Mart was created to help local vendors embrace digital commerce through a centralized marketplace for gift cards. The platform enables businesses to showcase their offerings, manage digital vouchers, and connect with a wider customer base through a seamless online purchasing experience.",
@@ -125,9 +125,9 @@ export const projects: Project[] = [
       { value: "Expanded", label: "Expanded reach for local retailers" },
     ],
     gallery: [
-      { from: "#434A5C", to: "#1B1E27", label: "Redemption requests", image: "/portfolio/puppy-digital-mart/redemption-requests.png" },
-      { from: "#8A90A0", to: "#434A5C", label: "User management", image: "/portfolio/puppy-digital-mart/user-management.png" },
-      { from: "#FF5A2E", to: "#8F2409", label: "Marketplace home", image: "/portfolio/puppy-digital-mart/home.png" },
+      { from: "#434A5C", to: "#1B1E27", label: "Redemption requests", image: "/portfolio/puppy-digital-mart/redemption-requests.webp" },
+      { from: "#8A90A0", to: "#434A5C", label: "User management", image: "/portfolio/puppy-digital-mart/user-management.webp" },
+      { from: "#FF5A2E", to: "#8F2409", label: "Marketplace home", image: "/portfolio/puppy-digital-mart/home.webp" },
     ],
     beforeAfter: {
       before: "Local vendors relied on fragmented sales channels with limited digital visibility, making it difficult to promote and sell gift cards effectively.",
