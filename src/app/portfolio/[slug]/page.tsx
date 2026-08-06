@@ -88,7 +88,7 @@ export default async function ProjectDetail({
             priority
             fetchPriority="high"
             style={{ background: project.coverBg || "transparent" }}
-            className="aspect-[16/9] w-full h-full rounded-4xl object-contain"
+            className="aspect-[16/9] w-full h-full rounded-4xl object-cover"
           />
         ) : (
           <Reveal>
