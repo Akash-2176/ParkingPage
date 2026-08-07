@@ -24,9 +24,16 @@ export function LoadingScreen() {
       return;
     }
     // Timer-driven (not rAF) so it can never stall in a throttled/background tab.
-    // On a slow device the user has already waited on the network and on JS
-    // parse before this even starts, so a fixed 1.5s vanity hold lands on top
-    // of a wait they've already served. Cut it short where it hurts most.
+    //
+    // This overlay is opaque and covers the viewport, so nothing underneath can
+    // count as the Largest Contentful Paint until it lifts. The old 1500ms hold
+    // (+250ms fallback +800ms exit) put a hard ~2.5s floor under LCP on every
+    // first visit — field data showed P50 3,424ms / P75 4,400ms, which is
+    // "Poor". 300ms still reads as a deliberate branded reveal rather than a
+    // flash, without owning the LCP number.
+    //
+    // On a slow device the user has already waited on network and JS parse
+    // before this even starts, so cut it to almost nothing there.
     const nav = navigator as Navigator & {
       deviceMemory?: number;
       connection?: { saveData?: boolean; effectiveType?: string };
@@ -36,7 +43,7 @@ export function LoadingScreen() {
       (nav.deviceMemory ?? 8) <= 4 ||
       !!nav.connection?.saveData ||
       /^(slow-)?2g$|^3g$/.test(nav.connection?.effectiveType ?? "");
-    const DURATION = weak ? 400 : 1500;
+    const DURATION = weak ? 150 : 300;
     const startedAt = Date.now();
     const interval = setInterval(() => {
       const p = Math.min((Date.now() - startedAt) / DURATION, 1);
@@ -48,7 +55,7 @@ export function LoadingScreen() {
       setCount(100);
       sessionStorage.setItem("ez-loaded", "1");
       setDone(true);
-    }, DURATION + 250);
+    }, DURATION + 60);
     return () => {
       clearInterval(interval);
       clearTimeout(finish);
@@ -61,7 +68,9 @@ export function LoadingScreen() {
         <motion.div
           className="fixed inset-0 z-[9998] flex flex-col items-center justify-center bg-ink-950"
           exit={{ y: "-100%" }}
-          transition={{ duration: 0.8, ease }}
+          // The viewport stays covered for the whole exit, so this duration is
+          // added to LCP too. 0.3s keeps the wipe legible without the cost.
+          transition={{ duration: 0.3, ease }}
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}

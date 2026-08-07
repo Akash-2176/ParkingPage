@@ -39,7 +39,9 @@ export function PortfolioGrid() {
 
       <div className="mt-12 grid gap-10 md:grid-cols-2">
         {filtered.map((p, i) => (
-          <ProjectCard key={p.slug} project={p} index={i} />
+          // Only the first card is above the fold here, so it's the one worth
+          // preloading — it's this page's LCP element.
+          <ProjectCard key={p.slug} project={p} index={i} priority={i === 0} />
         ))}
       </div>
     </div>

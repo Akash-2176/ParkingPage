@@ -7,7 +7,20 @@ import { motion } from "framer-motion";
 import type { Project } from "@/data/portfolio";
 import { GradientCover } from "@/components/ui/gradient-cover";
 
-export function ProjectCard({ project, index = 0 }: { project: Project; index?: number }) {
+export function ProjectCard({
+  project,
+  index = 0,
+  priority = false,
+}: {
+  project: Project;
+  index?: number;
+  /**
+   * Preload this card's image. Only pass it where the card is genuinely above
+   * the fold — on /portfolio it is; on the homepage showcase it sits ~2500px
+   * down, and preloading it there stole bandwidth from the hero.
+   */
+  priority?: boolean;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -27,9 +40,7 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
               alt={project.title}
               width={800}
               height={600}
-              // The first card is above the fold and is usually the page's LCP;
-              // preload it and leave the rest to the lazy loader.
-              priority={index === 0}
+              priority={priority}
               style={{ background: project.coverBg || "transparent" }}
               className="aspect-[4/3] w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
             />
