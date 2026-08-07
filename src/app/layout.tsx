@@ -13,6 +13,7 @@ import { FloatingDock } from "@/components/layout/floating-dock";
 import { CookieConsent } from "@/components/layout/cookie-consent";
 import { PageTransition } from "@/components/layout/page-transition";
 import { HydrationGate } from "@/components/providers/hydration-gate";
+import { Analytics } from "@/components/layout/analytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -113,9 +114,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        {/* Analytics placeholder — drop your GA4 / Plausible snippet here. */}
         <ThemeProvider>
           <HydrationGate />
+          {/* Cloudflare Web Analytics — mounts only after analytics consent. */}
+          <Analytics />
           <LoadingScreen />
           <CustomCursor />
           <SmoothScroll>

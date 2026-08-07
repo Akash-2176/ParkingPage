@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { CONSENT_EVENT } from "@/components/layout/analytics";
 
 export function CookieConsent() {
   const [show, setShow] = useState(false);
@@ -18,7 +19,10 @@ export function CookieConsent() {
   const decide = (choice: "all" | "essential") => {
     localStorage.setItem("ez-cookie", choice);
     setShow(false);
-    // Analytics placeholder: initialise here when choice === "all".
+    // Tell <Analytics> to re-read consent. `storage` doesn't fire in the tab
+    // that wrote it, so without this the beacon wouldn't start until the next
+    // page load.
+    window.dispatchEvent(new Event(CONSENT_EVENT));
   };
 
   return (
