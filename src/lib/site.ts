@@ -55,6 +55,21 @@ export const siteConfig = {
    */
   startingPrice: 15000,
   priceRange: "₹₹",
+  /**
+   * Search-console verification tokens (the bare token, not the whole tag).
+   *
+   * These ship in every build as a BACKUP method. The primary verification is a
+   * DNS TXT record on the domain, which survives a host change and can't be
+   * wiped by a deploy — the previous HTML-file verification was lost exactly
+   * that way when the parking page was replaced.
+   *
+   * Leave "" to omit the tag entirely; an empty verification meta is worse
+   * than none, since it looks configured but never verifies.
+   */
+  verification: {
+    google: "",
+    bing: "",
+  },
   // Real profiles only. An empty slot beats a link to a bare homepage —
   // add a platform back here once the profile actually has work on it.
   socials: {

@@ -71,6 +71,16 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
+  // Backup verification only — DNS TXT is the primary method. Each key is
+  // omitted unless a real token is set, so we never ship an empty meta tag.
+  verification: {
+    ...(siteConfig.verification.google
+      ? { google: siteConfig.verification.google }
+      : {}),
+    ...(siteConfig.verification.bing
+      ? { other: { "msvalidate.01": siteConfig.verification.bing } }
+      : {}),
+  },
 };
 
 export const viewport: Viewport = {
